@@ -6,135 +6,132 @@
 <title>HOOLIGANS SNG</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Unbounded:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0e0e0e;
-  --surface: #161616;
-  --card: #1c1c1c;
-  --card2: #222;
-  --border: rgba(255,255,255,0.08);
-  --border2: rgba(255,255,255,0.13);
-  --green: #4eff2a;
-  --green2: #39dd1e;
-  --green-dim: rgba(78,255,42,0.12);
-  --green-glow: rgba(78,255,42,0.18);
-  --accent: #c8ff00;
-  --text: #f5f5f5;
-  --text2: #999;
-  --text3: #555;
-  --nav-h: 72px;
+:root{
+  --bg:#0c0c0c;
+  --surface:#151515;
+  --card:#1a1a1a;
+  --card2:#202020;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --g1:#4fff28;
+  --g2:#b8ff00;
+  --glow:rgba(79,255,40,0.22);
+  --glow2:rgba(79,255,40,0.1);
+  --text:#f4f4f4;
+  --text2:#888;
+  --text3:#444;
+  --nav-h:70px;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* HEADER */
-.hdr{position:sticky;top:0;z-index:100;background:rgba(14,14,14,0.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:13px 16px 11px;display:flex;align-items:center;justify-content:space-between}
-.logo-wrap{display:flex;align-items:center;gap:9px}
-.logo-star{position:relative;width:34px;height:34px;flex-shrink:0}
-.logo-star svg{width:34px;height:34px}
-.logo-text{line-height:1}
-.logo-main{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:3.5px;background:linear-gradient(90deg,#4eff2a,#c8ff00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.logo-sub{font-family:'Unbounded',sans-serif;font-size:6.5px;letter-spacing:4px;color:var(--text3);margin-top:1px}
+/* BG BLOBS */
+body::before{content:'';position:fixed;top:-120px;left:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(79,255,40,0.07) 0%,transparent 70%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;height:300px;background:radial-gradient(circle,rgba(184,255,0,0.06) 0%,transparent 70%);pointer-events:none;z-index:0}
 
-.cart-pill{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:8px 14px;cursor:pointer;transition:all .2s;font-size:13px;color:var(--text2);font-weight:500}
-.cart-pill svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.cart-pill.has{border-color:var(--green);color:var(--green)}
-.cart-badge{background:var(--green);color:#000;font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;border-radius:6px;padding:2px 6px;display:none}
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:100;background:rgba(12,12,12,0.93);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border);padding:10px 15px 10px;display:flex;align-items:center;justify-content:space-between}
+
+/* LOGO */
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-svg{width:110px;height:36px;flex-shrink:0}
+.logo-sub{font-family:'Unbounded',sans-serif;font-size:6px;letter-spacing:4px;color:var(--text3);margin-top:2px}
+
+/* CART PILL */
+.cart-pill{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:8px 13px;cursor:pointer;transition:all .2s;font-size:12px;color:var(--text2);font-weight:500;position:relative}
+.cart-pill::before{content:'';position:absolute;inset:0;border-radius:20px;box-shadow:0 0 0 0 var(--glow);transition:box-shadow .2s}
+.cart-pill.has{border-color:rgba(79,255,40,0.5);color:var(--g1)}
+.cart-pill.has::before{box-shadow:0 0 14px 0 var(--glow2)}
+.cart-pill svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cart-badge{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;border-radius:6px;padding:2px 6px;display:none}
 .cart-pill.has .cart-badge{display:block}
 
 /* CONTENT */
-.content{padding:14px 14px calc(var(--nav-h) + 24px)}
+.content{padding:14px 13px calc(var(--nav-h) + 22px);position:relative;z-index:1}
 
 /* BANNER */
-.banner{background:linear-gradient(135deg,rgba(78,255,42,0.08) 0%,rgba(200,255,0,0.04) 100%);border:1px solid rgba(78,255,42,0.2);border-radius:16px;padding:13px 14px;display:flex;align-items:center;gap:11px;margin-bottom:18px}
-.ban-ico{width:38px;height:38px;background:rgba(78,255,42,0.12);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ban-ico svg{width:19px;height:19px;stroke:var(--green);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.ban-t{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;color:var(--text);margin-bottom:3px;letter-spacing:.3px}
+.banner{background:linear-gradient(135deg,rgba(79,255,40,0.07),rgba(184,255,0,0.03));border:1px solid rgba(79,255,40,0.18);border-radius:16px;padding:12px 13px;display:flex;align-items:center;gap:11px;margin-bottom:18px;position:relative;overflow:hidden}
+.banner::before{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(79,255,40,0.12),transparent 70%);pointer-events:none}
+.ban-ico{width:38px;height:38px;background:rgba(79,255,40,0.1);border:1px solid rgba(79,255,40,0.2);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ban-ico svg{width:18px;height:18px;stroke:var(--g1);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ban-t{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;color:var(--text);margin-bottom:3px}
 .ban-s{font-size:11px;color:var(--text2);line-height:1.5}
-.ban-s b{color:var(--green);font-weight:600}
+.ban-s b{background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700}
 
-/* SECTION LABEL */
+/* SEC ROW */
 .sec-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
-.sec-label{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;color:var(--text);letter-spacing:.5px}
-.sec-count{font-size:11px;color:var(--text3)}
+.sec-label{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;color:var(--text)}
+.sec-count{font-size:10px;color:var(--text3);font-family:'Unbounded',sans-serif}
 
 /* GRID */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 
 /* CARD */
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .18s,border-color .2s,box-shadow .2s;position:relative;animation:up .35s ease both}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .18s,border-color .2s;position:relative;animation:up .35s ease both}
 .card:active{transform:scale(.95)}
-.card.in-cart{border-color:rgba(78,255,42,0.45);box-shadow:0 0 20px rgba(78,255,42,0.08)}
+.card.in-cart{border-color:rgba(79,255,40,0.4)}
+.card-top-bar{height:2px;background:linear-gradient(90deg,var(--g1),var(--g2));opacity:.7}
+.card.in-cart .card-top-bar{opacity:1}
 
-.card-img{width:100%;aspect-ratio:1;background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.card-img{width:100%;aspect-ratio:1;background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .25s}
 .card:active .card-img img{transform:scale(1.06)}
-.card-img-ph{width:100%;aspect-ratio:1;background:linear-gradient(145deg,#1a1a1a,#242424);display:flex;align-items:center;justify-content:center}
-.card-img-ph svg{width:54px;height:54px;stroke:rgba(255,255,255,0.15);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.card-img-ph{width:100%;aspect-ratio:1;background:linear-gradient(145deg,#161616,#202020);display:flex;align-items:center;justify-content:center;position:relative}
+.card-img-ph::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(79,255,40,0.05),transparent 60%)}
+.card-img-ph svg{width:58px;height:58px;position:relative;z-index:1}
 
-/* COLOR STRIP ON TOP OF CARD */
-.card-strip{height:3px;width:100%;background:linear-gradient(90deg,var(--green),var(--accent))}
-
-.card-body{padding:11px}
-.card-name{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:7px;min-height:28px}
-.card-price{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;line-height:1;background:linear-gradient(90deg,var(--green),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.card-body{padding:10px 11px 12px}
+.card-name{font-family:'Unbounded',sans-serif;font-size:9.5px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:7px;min-height:26px}
+.card-price{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;line-height:1;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .card-rub{font-size:10px;color:var(--text3);margin-top:2px}
+.card-glow{position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,rgba(79,255,40,0.03));opacity:0;transition:opacity .2s}
+.card.in-cart .card-glow{opacity:1}
+.in-cart-badge{position:absolute;top:10px;right:9px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;font-family:'Unbounded',sans-serif;font-size:8px;font-weight:700;border-radius:6px;padding:3px 7px;letter-spacing:.3px;z-index:2}
 
-.in-cart-badge{position:absolute;top:9px;right:9px;background:var(--green);color:#000;font-family:'Unbounded',sans-serif;font-size:8px;font-weight:700;border-radius:6px;padding:3px 7px;letter-spacing:.5px}
-
-@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
 /* BOTTOM NAV */
-.nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(14,14,14,0.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);height:var(--nav-h);display:flex;align-items:stretch;padding:0 4px;padding-bottom:env(safe-area-inset-bottom)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:all .15s;border-radius:14px;margin:6px 3px;padding:4px 2px;position:relative}
-.nav-item:active{transform:scale(.9)}
-.nav-item.on{background:var(--green-dim)}
-.nav-ico{width:24px;height:24px;display:flex;align-items:center;justify-content:center}
-.nav-ico svg{width:22px;height:22px;stroke:var(--text3);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke .15s}
-.nav-item.on .nav-ico svg{stroke:var(--green)}
-.nav-label{font-family:'Inter',sans-serif;font-size:9px;font-weight:600;color:var(--text3);letter-spacing:.3px;transition:color .15s;text-transform:uppercase}
-.nav-item.on .nav-label{color:var(--green)}
-.nav-dot{position:absolute;top:6px;width:4px;height:4px;background:var(--green);border-radius:50%;opacity:0;transition:opacity .15s}
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(12,12,12,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);height:var(--nav-h);display:flex;align-items:stretch;padding:0 2px;padding-bottom:env(safe-area-inset-bottom)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:all .15s;border-radius:14px;margin:5px 2px;padding:0 2px;position:relative;-webkit-user-select:none;user-select:none}
+.nav-item:active{transform:scale(.88)}
+.nav-item.on .nav-bg{position:absolute;inset:0;border-radius:14px;background:rgba(79,255,40,0.08);box-shadow:0 0 18px rgba(79,255,40,0.12) inset}
+.nav-bg{position:absolute;inset:0;border-radius:14px;transition:all .2s}
+.nav-ico{width:26px;height:26px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.nav-ico svg{width:24px;height:24px;stroke:var(--text3);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:all .15s}
+.nav-item.on .nav-ico svg{stroke:var(--g1);filter:drop-shadow(0 0 4px rgba(79,255,40,0.6))}
+.nav-lbl{font-family:'Inter',sans-serif;font-size:8.5px;font-weight:600;color:var(--text3);letter-spacing:.3px;text-transform:uppercase;position:relative;z-index:1;transition:color .15s}
+.nav-item.on .nav-lbl{color:var(--g1)}
+.nav-dot{width:3px;height:3px;background:var(--g1);border-radius:50%;position:absolute;top:5px;opacity:0;transition:opacity .15s;box-shadow:0 0 6px var(--g1)}
 .nav-item.on .nav-dot{opacity:1}
 
-/* LOADER */
-.loader-wrap{display:flex;flex-direction:column;align-items:center;padding:70px 0;gap:14px}
-.loader-ring{width:38px;height:38px;border:1.5px solid var(--border2);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loader-t{font-family:'Unbounded',sans-serif;font-size:9px;color:var(--text3);letter-spacing:3px}
-
-/* EMPTY */
-.empty-wrap{text-align:center;padding:60px 16px}
-.empty-ico{width:58px;height:58px;background:var(--card);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
-.empty-ico svg{width:28px;height:28px;stroke:var(--text3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:1.5px}
-
 /* OVERLAY */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:300;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s}
 .overlay.on{opacity:1;pointer-events:all}
-.sheet{background:var(--surface);border:1px solid var(--border2);border-radius:24px 24px 0 0;width:100%;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.25,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
+.sheet{background:var(--surface);border:1px solid var(--border2);border-top:1px solid rgba(79,255,40,0.15);border-radius:24px 24px 0 0;width:100%;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.25,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
 .overlay.on .sheet{transform:translateY(0)}
-.drag{width:36px;height:3px;background:var(--border2);border-radius:2px;margin:11px auto 0}
+.drag{width:36px;height:3px;background:var(--border2);border-radius:2px;margin:10px auto 0}
 
 /* PRODUCT MODAL */
 .pmod-img-wrap{position:relative;width:100%}
 .pmod-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-.pmod-img-ph{width:100%;aspect-ratio:4/3;background:linear-gradient(145deg,#1a1a1a,#252525);display:flex;align-items:center;justify-content:center}
-.pmod-img-ph svg{width:90px;height:90px;stroke:rgba(255,255,255,0.1);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
-.pmod-img-gradient{position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(transparent,var(--surface))}
+.pmod-img-ph{width:100%;aspect-ratio:4/3;background:linear-gradient(145deg,#141414,#1e1e1e);display:flex;align-items:center;justify-content:center;position:relative}
+.pmod-img-ph::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(79,255,40,0.06),transparent 60%)}
+.pmod-img-ph svg{width:100px;height:100px;position:relative;z-index:1}
+.pmod-img-grad{position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(transparent,var(--surface))}
 
-.pmod-body{padding:16px 16px 24px}
-.pmod-cat{display:inline-flex;align-items:center;gap:5px;background:var(--green-dim);border:1px solid rgba(78,255,42,0.25);border-radius:8px;padding:4px 10px;margin-bottom:10px}
-.pmod-cat-t{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;color:var(--green);letter-spacing:1.5px;text-transform:uppercase}
+.pmod-body{padding:14px 16px 28px}
+.pmod-cat-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(79,255,40,0.08);border:1px solid rgba(79,255,40,0.2);border-radius:8px;padding:4px 10px;margin-bottom:10px}
+.pmod-cat-t{font-family:'Unbounded',sans-serif;font-size:8.5px;font-weight:700;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:1.5px;text-transform:uppercase}
 .pmod-name{font-family:'Unbounded',sans-serif;font-size:18px;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:12px}
-.pmod-prices{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
-.pmod-kzt{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;background:linear-gradient(90deg,var(--green),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.pmod-prices{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.pmod-kzt{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
 .pmod-rub{font-size:14px;color:var(--text2)}
-.pmod-desc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.pmod-desc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border)}
 
-.row-lbl{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px}
+.row-lbl{font-family:'Unbounded',sans-serif;font-size:8.5px;font-weight:600;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px}
 .variants{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
-.var-btn{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:7px 14px;color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
-.var-btn.on{border-color:var(--green);color:var(--green);background:var(--green-dim)}
+.var-btn{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:7px 14px;color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;position:relative}
+.var-btn.on{border-color:rgba(79,255,40,0.5);color:var(--g1);background:rgba(79,255,40,0.07);box-shadow:0 0 10px rgba(79,255,40,0.1)}
 
 .qty-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .qty-ctrl{display:flex;align-items:center;background:var(--card);border:1px solid var(--border2);border-radius:13px;overflow:hidden}
@@ -142,67 +139,120 @@ html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;
 .qb:active{background:var(--border2)}
 .qv{width:38px;text-align:center;font-family:'Unbounded',sans-serif;font-size:14px;font-weight:600;color:var(--text)}
 
-.add-btn{width:100%;background:linear-gradient(135deg,var(--green),var(--accent));color:#000;border:none;border-radius:14px;padding:16px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px}
+.add-btn{width:100%;background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;border:none;border-radius:14px;padding:16px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(79,255,40,0.25)}
 .add-btn svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .add-btn:active{transform:scale(.97);filter:brightness(.92)}
-.add-btn.done{background:linear-gradient(135deg,#2ecc12,#8ecf00)}
+.add-btn.done{background:linear-gradient(135deg,#2ecc12,#7ecf00);box-shadow:0 4px 20px rgba(46,204,18,0.2)}
 
-/* CART SHEET */
-.cart-hdr{padding:18px 16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.cart-title{font-family:'Unbounded',sans-serif;font-size:14px;font-weight:700}
+/* CART */
+.cart-hdr{padding:16px 16px 13px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cart-title{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700}
 .close-x{width:32px;height:32px;background:var(--card);border:1px solid var(--border2);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.close-x svg{width:14px;height:14px;stroke:var(--text2);fill:none;stroke-width:2;stroke-linecap:round}
+.close-x svg{width:14px;height:14px;stroke:var(--text2);fill:none;stroke-width:2.2;stroke-linecap:round}
 
-.cart-items{padding:6px 16px}
+.cart-items{padding:4px 15px}
 .ci{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--border)}
 .ci:last-child{border-bottom:none}
-.ci-thumb{width:50px;height:50px;background:var(--card);border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.ci-thumb{width:50px;height:50px;background:var(--card);border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border:1px solid var(--border)}
 .ci-thumb img{width:100%;height:100%;object-fit:cover}
-.ci-thumb svg{width:24px;height:24px;stroke:var(--text3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.ci-thumb svg{width:24px;height:24px}
 .ci-info{flex:1;min-width:0}
 .ci-name{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
 .ci-var{font-size:10px;color:var(--text3);margin-bottom:4px}
-.ci-price{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;background:linear-gradient(90deg,var(--green),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ci-price{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .ci-qty{display:flex;align-items:center;background:var(--card);border:1px solid var(--border2);border-radius:10px;overflow:hidden}
 .cqb{width:32px;height:32px;background:transparent;border:none;color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .cqb:active{background:var(--border2)}
 .cqv{width:26px;text-align:center;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:600}
 
-.cart-foot{padding:14px 16px 20px;border-top:1px solid var(--border);background:var(--surface);position:sticky;bottom:0}
+.cart-foot{padding:13px 15px 20px;border-top:1px solid var(--border);background:var(--surface);position:sticky;bottom:0}
 .total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.total-lbl{font-size:12px;color:var(--text2);font-weight:500}
+.total-lbl{font-size:12px;color:var(--text2)}
 .total-r{text-align:right}
-.total-kzt{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;background:linear-gradient(90deg,var(--green),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.total-kzt{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
 .total-rub{font-size:11px;color:var(--text3);margin-top:2px}
-.buy-btn{width:100%;background:linear-gradient(135deg,var(--green),var(--accent));color:#000;border:none;border-radius:14px;padding:16px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px}
+.buy-btn{width:100%;background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;border:none;border-radius:14px;padding:15px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 22px rgba(79,255,40,0.28)}
 .buy-btn svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .buy-btn:active{transform:scale(.97);filter:brightness(.92)}
 .cart-empty-wrap{padding:52px 16px;text-align:center}
-.cart-empty-wrap svg{width:46px;height:46px;stroke:var(--text3);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 14px;display:block}
-.cart-empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:2px}
+.cart-empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:2px;margin-top:14px}
+
+/* LOADER */
+.loader-wrap{display:flex;flex-direction:column;align-items:center;padding:70px 0;gap:14px}
+.loader-ring{width:38px;height:38px;border:1.5px solid var(--border2);border-top-color:var(--g1);border-radius:50%;animation:spin .7s linear infinite;box-shadow:0 0 14px rgba(79,255,40,0.15)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-t{font-family:'Unbounded',sans-serif;font-size:9px;color:var(--text3);letter-spacing:3px}
+
+/* EMPTY */
+.empty-wrap{text-align:center;padding:60px 16px}
+.empty-ico{width:60px;height:60px;background:var(--card);border:1px solid var(--border);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.empty-ico svg{width:30px;height:30px;stroke:var(--text3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:1.5px}
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <div class="hdr">
+  <!-- LOGO: Hooligans SNG с кастетом -->
   <div class="logo-wrap">
-    <div class="logo-star">
-      <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="lg1" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#4eff2a"/>
-            <stop offset="100%" stop-color="#c8ff00"/>
-          </linearGradient>
-        </defs>
-        <polygon points="17,2 21,12 31,13 23,20 26,30 17,25 8,30 11,20 3,13 13,12" stroke="url(#lg1)" stroke-width="1.5" stroke-linejoin="round" fill="rgba(78,255,42,0.08)"/>
-        <circle cx="17" cy="17" r="3.5" stroke="url(#lg1)" stroke-width="1.5"/>
-      </svg>
-    </div>
-    <div class="logo-text">
-      <div class="logo-main">HOOLIGANS</div>
-      <div class="logo-sub">SNG SHOP</div>
-    </div>
+    <svg class="logo-svg" viewBox="0 0 220 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="textGrad" x1="0" y1="0" x2="220" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#4fff28"/>
+          <stop offset="50%" stop-color="#b8ff00"/>
+          <stop offset="100%" stop-color="#4fff28"/>
+        </linearGradient>
+        <linearGradient id="metalGrad" x1="0" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#d0d0d0"/>
+          <stop offset="30%" stop-color="#a0a0a0"/>
+          <stop offset="60%" stop-color="#707070"/>
+          <stop offset="100%" stop-color="#505050"/>
+        </linearGradient>
+        <linearGradient id="metalGrad2" x1="0" y1="0" x2="0" y2="16" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#e0e0e0"/>
+          <stop offset="50%" stop-color="#888"/>
+          <stop offset="100%" stop-color="#555"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="1.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Кастет (металлический) -->
+      <!-- Основа кастета -->
+      <rect x="4" y="18" width="36" height="18" rx="4" fill="url(#metalGrad)" stroke="#333" stroke-width="0.5"/>
+      <!-- Блик на основе -->
+      <rect x="6" y="19" width="32" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+      <!-- 4 кольца пальцев -->
+      <circle cx="12" cy="16" r="5" fill="url(#metalGrad2)" stroke="#333" stroke-width="0.5"/>
+      <circle cx="12" cy="16" r="2.5" fill="#111" stroke="#222" stroke-width="0.5"/>
+      <circle cx="12" cy="16" r="1" fill="rgba(255,255,255,0.15)"/>
+      
+      <circle cx="21" cy="14" r="5.5" fill="url(#metalGrad2)" stroke="#333" stroke-width="0.5"/>
+      <circle cx="21" cy="14" r="2.8" fill="#111" stroke="#222" stroke-width="0.5"/>
+      <circle cx="21" cy="14" r="1.1" fill="rgba(255,255,255,0.15)"/>
+      
+      <circle cx="30" cy="14" r="5.5" fill="url(#metalGrad2)" stroke="#333" stroke-width="0.5"/>
+      <circle cx="30" cy="14" r="2.8" fill="#111" stroke="#222" stroke-width="0.5"/>
+      <circle cx="30" cy="14" r="1.1" fill="rgba(255,255,255,0.15)"/>
+      
+      <circle cx="38" cy="16" r="5" fill="url(#metalGrad2)" stroke="#333" stroke-width="0.5"/>
+      <circle cx="38" cy="16" r="2.5" fill="#111" stroke="#222" stroke-width="0.5"/>
+      <circle cx="38" cy="16" r="1" fill="rgba(255,255,255,0.15)"/>
+      <!-- Шип снизу -->
+      <polygon points="12,36 16,44 8,44" fill="url(#metalGrad)" stroke="#333" stroke-width="0.5"/>
+      <!-- Блик на шипе -->
+      <polygon points="12,37 14,41 10,41" fill="rgba(255,255,255,0.2)"/>
+      <!-- Нижняя тень кастета -->
+      <rect x="4" y="32" width="36" height="4" rx="0" fill="rgba(0,0,0,0.4)"/>
+      <!-- ТЕКСТ HOOLIGANS -->
+      <text x="50" y="26" font-family="'Bebas Neue',sans-serif" font-size="22" fill="url(#textGrad)" filter="url(#glow)" letter-spacing="2">HOOLIGANS</text>
+      <!-- Зелёное свечение под текстом -->
+      <rect x="50" y="29" width="170" height="1.5" rx="1" fill="url(#textGrad)" opacity="0.4"/>
+      <!-- SNG маленький -->
+      <text x="51" y="40" font-family="'Unbounded',sans-serif" font-size="7" fill="#555" letter-spacing="5">SNG SHOP</text>
+    </svg>
   </div>
   <div class="cart-pill" id="cartBtn" onclick="openCart()">
     <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -221,12 +271,10 @@ html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;
       <div class="ban-s">Напиши <b>Асхе</b> — закажем специально под тебя</div>
     </div>
   </div>
-
   <div class="sec-row">
     <div class="sec-label" id="secLabel">Кастеты</div>
     <div class="sec-count" id="secCount"></div>
   </div>
-
   <div id="container">
     <div class="loader-wrap">
       <div class="loader-ring"></div>
@@ -236,41 +284,83 @@ html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;
 </div>
 
 <!-- BOTTOM NAV -->
-<nav class="nav" id="nav">
-  <div class="nav-item on" data-cat="кастеты" onclick="navClick(this,'кастеты')">
+<nav class="nav">
+  <div class="nav-item on" onclick="navClick(this,'кастеты')">
+    <div class="nav-bg"></div>
     <div class="nav-dot"></div>
     <div class="nav-ico">
-      <svg viewBox="0 0 24 24"><rect x="2" y="10" width="20" height="10" rx="2"/><path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/><line x1="8" y1="10" x2="8" y2="20"/><line x1="12" y1="10" x2="12" y2="20"/><line x1="16" y1="10" x2="16" y2="20"/></svg>
+      <!-- Кастет иконка -->
+      <svg viewBox="0 0 24 24">
+        <rect x="2" y="13" width="20" height="8" rx="2.5" stroke-width="1.5"/>
+        <path d="M5 13v-2.5a1.5 1.5 0 011.5-1.5h11a1.5 1.5 0 011.5 1.5V13" stroke-width="1.5"/>
+        <circle cx="7.5" cy="9" r="2" stroke-width="1.4"/>
+        <circle cx="12" cy="8" r="2.2" stroke-width="1.4"/>
+        <circle cx="16.5" cy="9" r="2" stroke-width="1.4"/>
+        <line x1="7.5" y1="11" x2="7.5" y2="21" stroke-width="1.2" opacity=".5"/>
+        <line x1="12" y1="11" x2="12" y2="21" stroke-width="1.2" opacity=".5"/>
+        <line x1="16.5" y1="11" x2="16.5" y2="21" stroke-width="1.2" opacity=".5"/>
+      </svg>
     </div>
-    <div class="nav-label">Кастеты</div>
+    <div class="nav-lbl">Кастеты</div>
   </div>
-  <div class="nav-item" data-cat="дубинки" onclick="navClick(this,'дубинки')">
+  <div class="nav-item" onclick="navClick(this,'дубинки')">
+    <div class="nav-bg"></div>
     <div class="nav-dot"></div>
     <div class="nav-ico">
-      <svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5" stroke-width="2.8" stroke-linecap="round"/><circle cx="6.5" cy="17.5" r="3"/></svg>
+      <!-- Дубинка полицейская -->
+      <svg viewBox="0 0 24 24">
+        <rect x="10" y="2" width="4" height="10" rx="2" stroke-width="1.5"/>
+        <rect x="9" y="11" width="6" height="11" rx="1.5" stroke-width="1.5"/>
+        <line x1="9" y1="14" x2="15" y2="14" stroke-width="1" opacity=".5"/>
+        <line x1="9" y1="17" x2="15" y2="17" stroke-width="1" opacity=".5"/>
+        <line x1="9" y1="20" x2="15" y2="20" stroke-width="1" opacity=".5"/>
+      </svg>
     </div>
-    <div class="nav-label">Дубинки</div>
+    <div class="nav-lbl">Дубинки</div>
   </div>
-  <div class="nav-item" data-cat="подики" onclick="navClick(this,'подики')">
+  <div class="nav-item" onclick="navClick(this,'подики')">
+    <div class="nav-bg"></div>
     <div class="nav-dot"></div>
     <div class="nav-ico">
-      <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="3" rx="1"/><circle cx="12" cy="17" r="1"/><line x1="7" y1="9" x2="17" y2="9"/></svg>
+      <!-- Под девайс -->
+      <svg viewBox="0 0 24 24">
+        <rect x="6" y="3" width="12" height="18" rx="3" stroke-width="1.5"/>
+        <rect x="8.5" y="5.5" width="7" height="4" rx="1" stroke-width="1.3"/>
+        <circle cx="12" cy="17" r="1.2" stroke-width="1.3"/>
+        <line x1="6" y1="11" x2="18" y2="11" stroke-width="1" opacity=".4"/>
+        <line x1="9" y1="14" x2="15" y2="14" stroke-width="1" opacity=".3"/>
+      </svg>
     </div>
-    <div class="nav-label">Подики</div>
+    <div class="nav-lbl">Подики</div>
   </div>
-  <div class="nav-item" data-cat="одноразки" onclick="navClick(this,'одноразки')">
+  <div class="nav-item" onclick="navClick(this,'одноразки')">
+    <div class="nav-bg"></div>
     <div class="nav-dot"></div>
     <div class="nav-ico">
-      <svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="20" rx="2"/><rect x="10" y="4" width="4" height="6" rx="1"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="10" y1="17" x2="14" y2="17"/></svg>
+      <!-- Одноразный вейп -->
+      <svg viewBox="0 0 24 24">
+        <rect x="8" y="2" width="8" height="20" rx="3" stroke-width="1.5"/>
+        <rect x="10" y="4" width="4" height="5" rx="1" stroke-width="1.3"/>
+        <circle cx="12" cy="17.5" r="1.5" stroke-width="1.3"/>
+        <line x1="10" y1="13" x2="14" y2="13" stroke-width="1" opacity=".4"/>
+        <!-- Пар сверху -->
+        <path d="M10 1.5 Q11 0.5 12 1.5 Q13 2.5 14 1.5" stroke-width="1" opacity=".5" fill="none"/>
+      </svg>
     </div>
-    <div class="nav-label">Одноразки</div>
+    <div class="nav-lbl">Одноразки</div>
   </div>
-  <div class="nav-item" data-cat="прочее" onclick="navClick(this,'прочее')">
+  <div class="nav-item" onclick="navClick(this,'прочее')">
+    <div class="nav-bg"></div>
     <div class="nav-dot"></div>
     <div class="nav-ico">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+      <!-- Три точки / прочее -->
+      <svg viewBox="0 0 24 24">
+        <circle cx="5" cy="12" r="2" stroke-width="1.5"/>
+        <circle cx="12" cy="12" r="2" stroke-width="1.5"/>
+        <circle cx="19" cy="12" r="2" stroke-width="1.5"/>
+      </svg>
     </div>
-    <div class="nav-label">Прочее</div>
+    <div class="nav-lbl">Прочее</div>
   </div>
 </nav>
 
@@ -299,49 +389,48 @@ html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;
 <script>
 const API = "http://127.0.0.1:5000";
 
-const CAT_ICO = {
-  'кастеты': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10" width="20" height="10" rx="2"/><path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/><line x1="8" y1="10" x2="8" y2="20"/><line x1="12" y1="10" x2="12" y2="20"/><line x1="16" y1="10" x2="16" y2="20"/></svg>`,
-  'дубинки': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5" stroke-width="2.8"/><circle cx="6.5" cy="17.5" r="3"/></svg>`,
-  'подики': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="3" rx="1"/><circle cx="12" cy="17" r="1"/><line x1="7" y1="9" x2="17" y2="9"/></svg>`,
-  'одноразки': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="20" rx="2"/><rect x="10" y="4" width="4" height="6" rx="1"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="10" y1="17" x2="14" y2="17"/></svg>`,
-  'прочее': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>`,
+const CAT_SVG = {
+  'кастеты': `<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="13" width="20" height="8" rx="2.5"/><path d="M5 13v-2.5a1.5 1.5 0 011.5-1.5h11a1.5 1.5 0 011.5 1.5V13"/><circle cx="7.5" cy="9" r="2"/><circle cx="12" cy="8" r="2.2"/><circle cx="16.5" cy="9" r="2"/><line x1="7.5" y1="11" x2="7.5" y2="21" opacity=".4"/><line x1="12" y1="11" x2="12" y2="21" opacity=".4"/><line x1="16.5" y1="11" x2="16.5" y2="21" opacity=".4"/></svg>`,
+  'дубинки': `<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="2" width="4" height="10" rx="2"/><rect x="9" y="11" width="6" height="11" rx="1.5"/><line x1="9" y1="14" x2="15" y2="14" opacity=".4"/><line x1="9" y1="17" x2="15" y2="17" opacity=".4"/><line x1="9" y1="20" x2="15" y2="20" opacity=".4"/></svg>`,
+  'подики': `<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="3"/><rect x="8.5" y="5.5" width="7" height="4" rx="1"/><circle cx="12" cy="17" r="1.2"/><line x1="6" y1="11" x2="18" y2="11" opacity=".4"/></svg>`,
+  'одноразки': `<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="20" rx="3"/><rect x="10" y="4" width="4" height="5" rx="1"/><circle cx="12" cy="17.5" r="1.5"/><line x1="10" y1="13" x2="14" y2="13" opacity=".4"/><path d="M10 1.5 Q11 0.5 12 1.5 Q13 2.5 14 1.5" opacity=".4" fill="none"/></svg>`,
+  'прочее': `<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>`,
 };
-
 const CAT_NAMES = {'кастеты':'Кастеты','дубинки':'Дубинки','подики':'Подики','одноразки':'Одноразки','прочее':'Прочее'};
 
 let products=[], curCat='кастеты', cart=[], selProd=null, selVar=null, selQty=1;
 
-async function loadProducts() {
-  try {
-    const r = await fetch(`${API}/products`);
-    const d = await r.json();
-    if (d.ok) { products=d.products; render(curCat); }
+async function loadProducts(){
+  try{
+    const r=await fetch(`${API}/products`);
+    const d=await r.json();
+    if(d.ok){products=d.products;render(curCat);}
     else showErr();
-  } catch(e) { showErr(); }
+  }catch(e){showErr();}
 }
 
-function showErr() {
-  document.getElementById('container').innerHTML=`<div class="empty-wrap"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="empty-t">Ошибка загрузки</div></div>`;
+function showErr(){
+  document.getElementById('container').innerHTML=`<div class="empty-wrap"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="empty-t">Ошибка загрузки</div></div>`;
 }
 
-function render(cat) {
-  const list = products.filter(p=>p.category===cat);
-  document.getElementById('secLabel').textContent = CAT_NAMES[cat]||cat;
-  document.getElementById('secCount').textContent = list.length ? `${list.length} товаров` : '';
+function render(cat){
+  const list=products.filter(p=>p.category===cat);
+  document.getElementById('secLabel').textContent=CAT_NAMES[cat]||cat;
+  document.getElementById('secCount').textContent=list.length?`${list.length} товаров`:'';
   const c=document.getElementById('container');
-  if (!list.length) {
-    c.innerHTML=`<div class="empty-wrap"><div class="empty-ico">${CAT_ICO[cat]||CAT_ICO['прочее']}</div><div class="empty-t">Товаров нет</div></div>`;
+  if(!list.length){
+    c.innerHTML=`<div class="empty-wrap"><div class="empty-ico">${(CAT_SVG[cat]||CAT_SVG['прочее']).replace('rgba(255,255,255,0.18)','var(--text3)')}</div><div class="empty-t">Товаров нет</div></div>`;
     return;
   }
   const inCart=new Set(cart.map(i=>i.id));
   c.innerHTML=`<div class="grid">${list.map((p,i)=>{
-    const ico=CAT_ICO[p.category]||CAT_ICO['прочее'];
+    const ico=CAT_SVG[p.category]||CAT_SVG['прочее'];
     const ic=inCart.has(p.id);
     const imgHtml=p.image_url
-      ? `<div class="card-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card-img-ph>${ico}</div>'"></div>`
-      : `<div class="card-img-ph">${ico}</div>`;
+      ?`<div class="card-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy" onerror="this.parentElement.className='card-img-ph';this.remove()"></div>`
+      :`<div class="card-img-ph">${ico}</div>`;
     return `<div class="card${ic?' in-cart':''}" onclick="openProd(${p.id})" style="animation-delay:${i*.05}s">
-      <div class="card-strip"></div>
+      <div class="card-top-bar"></div>
       ${ic?'<div class="in-cart-badge">В корзине</div>':''}
       ${imgHtml}
       <div class="card-body">
@@ -349,11 +438,12 @@ function render(cat) {
         <div class="card-price">${p.price_kzt.toLocaleString()} ₸</div>
         <div class="card-rub">${p.price_rub.toLocaleString()} ₽</div>
       </div>
+      <div class="card-glow"></div>
     </div>`;
   }).join('')}</div>`;
 }
 
-function navClick(el, cat) {
+function navClick(el,cat){
   curCat=cat;
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('on'));
   el.classList.add('on');
@@ -361,26 +451,26 @@ function navClick(el, cat) {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function openProd(id) {
+function openProd(id){
   const p=products.find(x=>x.id===id);
-  if (!p) return;
-  selProd=p; selVar=null; selQty=1;
-  const ico=CAT_ICO[p.category]||CAT_ICO['прочее'];
+  if(!p)return;
+  selProd=p;selVar=null;selQty=1;
+  const ico=CAT_SVG[p.category]||CAT_SVG['прочее'];
   const vars=p.variants?p.variants.split(',').map(v=>v.trim()).filter(Boolean):[];
   const inCart=cart.find(i=>i.id===id);
   const imgHtml=p.image_url
-    ? `<div class="pmod-img-wrap"><img class="pmod-img" src="${p.image_url}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=pmod-img-ph>${ico}</div>'"><div class="pmod-img-gradient"></div></div>`
-    : `<div class="pmod-img-ph">${ico}</div>`;
+    ?`<div class="pmod-img-wrap"><img class="pmod-img" src="${p.image_url}" alt="${p.name}" onerror="this.style.display='none'"><div class="pmod-img-grad"></div></div>`
+    :`<div class="pmod-img-ph">${ico}</div>`;
   document.getElementById('prodContent').innerHTML=`
     ${imgHtml}
     <div class="pmod-body">
-      <div class="pmod-cat"><span class="pmod-cat-t">${p.category}</span></div>
+      <div class="pmod-cat-tag"><span class="pmod-cat-t">${p.category}</span></div>
       <div class="pmod-name">${p.name}</div>
       <div class="pmod-prices">
         <div class="pmod-kzt">${p.price_kzt.toLocaleString()} ₸</div>
         <div class="pmod-rub">${p.price_rub.toLocaleString()} ₽</div>
       </div>
-      ${p.description?`<div class="pmod-desc">${p.description}</div>`:'<div style="margin-bottom:20px"></div>'}
+      ${p.description?`<div class="pmod-desc">${p.description}</div>`:'<div style="margin-bottom:18px"></div>'}
       ${vars.length?`<div class="row-lbl">Выбери вариант</div><div class="variants">${vars.map(v=>`<button class="var-btn" onclick="pickVar(this,'${v}')">${v}</button>`).join('')}</div>`:''}
       <div class="qty-row">
         <div class="row-lbl">Количество</div>
@@ -430,11 +520,14 @@ function closeCartOut(e){if(e.target===document.getElementById('cartOverlay'))cl
 
 function renderCart(){
   const c=document.getElementById('cartContent');
-  if(!cart.length){c.innerHTML=`<div class="cart-empty-wrap"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div class="cart-empty-t">Корзина пустая</div></div>`;return;}
+  if(!cart.length){
+    c.innerHTML=`<div class="cart-empty-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div class="cart-empty-t">Корзина пустая</div></div>`;
+    return;
+  }
   const tkzt=cart.reduce((s,i)=>s+i.price_kzt*i.qty,0);
   const trub=cart.reduce((s,i)=>s+i.price_rub*i.qty,0);
   c.innerHTML=`<div class="cart-items">${cart.map((item,idx)=>{
-    const ico=CAT_ICO[item.category]||CAT_ICO['прочее'];
+    const ico=CAT_SVG[item.category]||CAT_SVG['прочее'];
     const thumb=item.image_url?`<img src="${item.image_url}" onerror="this.style.display='none'">`:ico;
     return `<div class="ci">
       <div class="ci-thumb">${thumb}</div>
@@ -480,7 +573,13 @@ function checkout(){
   else alert('Открой через Telegram бота!');
 }
 
-if(window.Telegram&&window.Telegram.WebApp){window.Telegram.WebApp.ready();window.Telegram.WebApp.expand();}
+if(window.Telegram&&window.Telegram.WebApp){
+  const tg=window.Telegram.WebApp;
+  tg.ready();
+  tg.expand();
+  tg.disableVerticalSwipes();
+  if(tg.requestFullscreen)tg.requestFullscreen();
+}
 loadProducts();
 </script>
 </body>
