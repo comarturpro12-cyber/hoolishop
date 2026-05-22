@@ -1,0 +1,1149 @@
+!DOCTYPE html
+html lang=ru
+head
+  meta charset=UTF-8
+  meta name=viewport content=width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no
+  titleHOOLIGANS SNG SHOPtitle
+  link href=httpsfonts.googleapis.comcss2family=Bebas+Neue&family=Unboundedwght@400;600;700;900&family=Interwght@400;500;600&display=swap rel=stylesheet
+  style
+    root {
+      --black #0a0a0a;
+      --dark #111111;
+      --card #161616;
+      --border #1f1f1f;
+      --green #39ff14;
+      --green-dim #27b80e;
+      --green-glow rgba(57, 255, 20, 0.15);
+      --green-glow2 rgba(57, 255, 20, 0.08);
+      --text #f0f0f0;
+      --text-muted #666;
+      --text-dim #999;
+      --red #ff3a3a;
+    }
+
+     { margin 0; padding 0; box-sizing border-box; -webkit-tap-highlight-color transparent; }
+
+    html, body {
+      background var(--black);
+      color var(--text);
+      font-family 'Inter', sans-serif;
+      min-height 100vh;
+      overflow-x hidden;
+    }
+
+     ШАПКА 
+    .header {
+      position sticky;
+      top 0;
+      z-index 100;
+      background rgba(10,10,10,0.95);
+      backdrop-filter blur(20px);
+      border-bottom 1px solid var(--border);
+      padding 14px 16px 10px;
+    }
+
+    .header-top {
+      display flex;
+      align-items center;
+      justify-content space-between;
+      margin-bottom 12px;
+    }
+
+    .logo {
+      font-family 'Bebas Neue', sans-serif;
+      font-size 22px;
+      letter-spacing 3px;
+      color var(--green);
+      text-shadow 0 0 20px var(--green);
+      line-height 1;
+    }
+
+    .logo span {
+      color var(--text);
+      opacity 0.5;
+    }
+
+    .cart-btn {
+      position relative;
+      background var(--card);
+      border 1px solid var(--border);
+      border-radius 12px;
+      padding 8px 14px;
+      color var(--text);
+      font-family 'Inter', sans-serif;
+      font-size 13px;
+      font-weight 600;
+      cursor pointer;
+      display flex;
+      align-items center;
+      gap 6px;
+      transition all 0.2s;
+    }
+
+    .cart-btnactive { transform scale(0.95); }
+    .cart-btn.has-items {
+      border-color var(--green);
+      color var(--green);
+      box-shadow 0 0 12px var(--green-glow);
+    }
+
+    .cart-count {
+      background var(--green);
+      color var(--black);
+      font-size 10px;
+      font-weight 700;
+      border-radius 50%;
+      width 18px;
+      height 18px;
+      display flex;
+      align-items center;
+      justify-content center;
+    }
+
+     КАТЕГОРИИ 
+    .categories {
+      display flex;
+      gap 8px;
+      overflow-x auto;
+      padding-bottom 2px;
+      scrollbar-width none;
+    }
+    .categories-webkit-scrollbar { display none; }
+
+    .cat-btn {
+      flex-shrink 0;
+      background transparent;
+      border 1px solid var(--border);
+      border-radius 20px;
+      padding 6px 14px;
+      color var(--text-dim);
+      font-family 'Inter', sans-serif;
+      font-size 12px;
+      font-weight 500;
+      cursor pointer;
+      transition all 0.2s;
+      white-space nowrap;
+      text-transform uppercase;
+      letter-spacing 0.5px;
+    }
+
+    .cat-btn.active {
+      background var(--green);
+      border-color var(--green);
+      color var(--black);
+      font-weight 700;
+      box-shadow 0 0 12px var(--green-glow);
+    }
+
+    .cat-btnactive { transform scale(0.93); }
+
+     КОНТЕНТ 
+    .content {
+      padding 16px;
+      padding-bottom 120px;
+    }
+
+    .section-title {
+      font-family 'Unbounded', sans-serif;
+      font-size 11px;
+      font-weight 600;
+      color var(--text-muted);
+      letter-spacing 2px;
+      text-transform uppercase;
+      margin-bottom 14px;
+    }
+
+     СЕТКА ТОВАРОВ 
+    .products-grid {
+      display grid;
+      grid-template-columns 1fr 1fr;
+      gap 10px;
+    }
+
+     КАРТОЧКА 
+    .product-card {
+      background var(--card);
+      border 1px solid var(--border);
+      border-radius 16px;
+      overflow hidden;
+      cursor pointer;
+      transition all 0.2s;
+      position relative;
+    }
+
+    .product-cardactive { transform scale(0.97); }
+    .product-card.in-cart {
+      border-color var(--green);
+      box-shadow 0 0 16px var(--green-glow2);
+    }
+
+    .product-img {
+      width 100%;
+      aspect-ratio 1;
+      object-fit cover;
+      background #1a1a1a;
+      display flex;
+      align-items center;
+      justify-content center;
+    }
+
+    .product-img img {
+      width 100%;
+      height 100%;
+      object-fit cover;
+    }
+
+    .product-img-placeholder {
+      width 100%;
+      aspect-ratio 1;
+      background linear-gradient(135deg, #1a1a1a, #222);
+      display flex;
+      align-items center;
+      justify-content center;
+      font-size 40px;
+    }
+
+    .product-info {
+      padding 10px;
+    }
+
+    .product-name {
+      font-family 'Unbounded', sans-serif;
+      font-size 11px;
+      font-weight 600;
+      color var(--text);
+      line-height 1.3;
+      margin-bottom 6px;
+    }
+
+    .product-price {
+      font-family 'Bebas Neue', sans-serif;
+      font-size 18px;
+      color var(--green);
+      letter-spacing 1px;
+      line-height 1;
+    }
+
+    .product-price-rub {
+      font-size 11px;
+      color var(--text-muted);
+      font-family 'Inter', sans-serif;
+      margin-top 2px;
+    }
+
+    .in-cart-badge {
+      position absolute;
+      top 8px;
+      right 8px;
+      background var(--green);
+      color var(--black);
+      font-size 10px;
+      font-weight 700;
+      border-radius 8px;
+      padding 2px 7px;
+      font-family 'Inter', sans-serif;
+    }
+
+     ЗАГРУЗКА 
+    .loader {
+      display flex;
+      flex-direction column;
+      align-items center;
+      justify-content center;
+      padding 60px 20px;
+      gap 16px;
+    }
+
+    .loader-ring {
+      width 40px;
+      height 40px;
+      border 2px solid var(--border);
+      border-top-color var(--green);
+      border-radius 50%;
+      animation spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform rotate(360deg); } }
+
+    .loader-text {
+      font-family 'Unbounded', sans-serif;
+      font-size 10px;
+      color var(--text-muted);
+      letter-spacing 2px;
+    }
+
+     ПУСТО 
+    .empty {
+      text-align center;
+      padding 60px 20px;
+    }
+
+    .empty-icon { font-size 48px; margin-bottom 12px; }
+    .empty-text {
+      font-family 'Unbounded', sans-serif;
+      font-size 12px;
+      color var(--text-muted);
+      letter-spacing 1px;
+    }
+
+     МОДАЛКА ТОВАРА 
+    .modal-overlay {
+      position fixed;
+      inset 0;
+      background rgba(0,0,0,0.85);
+      z-index 200;
+      display flex;
+      align-items flex-end;
+      opacity 0;
+      pointer-events none;
+      transition opacity 0.25s;
+    }
+
+    .modal-overlay.open {
+      opacity 1;
+      pointer-events all;
+    }
+
+    .modal {
+      background var(--dark);
+      border 1px solid var(--border);
+      border-radius 24px 24px 0 0;
+      width 100%;
+      max-height 90vh;
+      overflow-y auto;
+      transform translateY(100%);
+      transition transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+      padding-bottom env(safe-area-inset-bottom);
+    }
+
+    .modal-overlay.open .modal {
+      transform translateY(0);
+    }
+
+    .modal-handle {
+      width 36px;
+      height 4px;
+      background var(--border);
+      border-radius 2px;
+      margin 12px auto 0;
+    }
+
+    .modal-img {
+      width 100%;
+      aspect-ratio 169;
+      object-fit cover;
+      background #1a1a1a;
+    }
+
+    .modal-img-placeholder {
+      width 100%;
+      aspect-ratio 169;
+      background linear-gradient(135deg, #1a1a1a, #222);
+      display flex;
+      align-items center;
+      justify-content center;
+      font-size 64px;
+    }
+
+    .modal-body {
+      padding 20px 16px 24px;
+    }
+
+    .modal-category {
+      font-size 10px;
+      font-weight 600;
+      color var(--green);
+      text-transform uppercase;
+      letter-spacing 2px;
+      margin-bottom 8px;
+    }
+
+    .modal-name {
+      font-family 'Unbounded', sans-serif;
+      font-size 18px;
+      font-weight 700;
+      color var(--text);
+      line-height 1.3;
+      margin-bottom 12px;
+    }
+
+    .modal-price {
+      font-family 'Bebas Neue', sans-serif;
+      font-size 32px;
+      color var(--green);
+      letter-spacing 2px;
+      line-height 1;
+    }
+
+    .modal-price-rub {
+      font-size 14px;
+      color var(--text-muted);
+      font-family 'Inter', sans-serif;
+      margin-top 4px;
+      margin-bottom 16px;
+    }
+
+    .modal-desc {
+      font-size 13px;
+      color var(--text-dim);
+      line-height 1.6;
+      margin-bottom 20px;
+    }
+
+     ВАРИАНТЫ 
+    .variants-title {
+      font-size 11px;
+      font-weight 600;
+      color var(--text-muted);
+      text-transform uppercase;
+      letter-spacing 1px;
+      margin-bottom 10px;
+    }
+
+    .variants-list {
+      display flex;
+      flex-wrap wrap;
+      gap 8px;
+      margin-bottom 20px;
+    }
+
+    .variant-btn {
+      background var(--card);
+      border 1px solid var(--border);
+      border-radius 10px;
+      padding 7px 14px;
+      color var(--text-dim);
+      font-size 12px;
+      font-weight 500;
+      cursor pointer;
+      transition all 0.15s;
+    }
+
+    .variant-btn.selected {
+      border-color var(--green);
+      color var(--green);
+      background var(--green-glow2);
+    }
+
+     КОЛИЧЕСТВО 
+    .qty-row {
+      display flex;
+      align-items center;
+      gap 16px;
+      margin-bottom 20px;
+    }
+
+    .qty-label {
+      font-size 11px;
+      font-weight 600;
+      color var(--text-muted);
+      text-transform uppercase;
+      letter-spacing 1px;
+    }
+
+    .qty-controls {
+      display flex;
+      align-items center;
+      gap 0;
+      background var(--card);
+      border 1px solid var(--border);
+      border-radius 12px;
+      overflow hidden;
+    }
+
+    .qty-btn {
+      width 40px;
+      height 40px;
+      background transparent;
+      border none;
+      color var(--text);
+      font-size 18px;
+      cursor pointer;
+      display flex;
+      align-items center;
+      justify-content center;
+      transition background 0.15s;
+    }
+
+    .qty-btnactive { background var(--border); }
+
+    .qty-val {
+      width 36px;
+      text-align center;
+      font-family 'Unbounded', sans-serif;
+      font-size 14px;
+      font-weight 600;
+      color var(--text);
+    }
+
+     КНОПКА ДОБАВИТЬ 
+    .add-btn {
+      width 100%;
+      background var(--green);
+      color var(--black);
+      border none;
+      border-radius 14px;
+      padding 16px;
+      font-family 'Unbounded', sans-serif;
+      font-size 13px;
+      font-weight 700;
+      letter-spacing 1px;
+      cursor pointer;
+      transition all 0.15s;
+      text-transform uppercase;
+    }
+
+    .add-btnactive { transform scale(0.97); filter brightness(0.9); }
+    .add-btn.added {
+      background var(--green-dim);
+    }
+
+     КОРЗИНА 
+    .cart-overlay {
+      position fixed;
+      inset 0;
+      background rgba(0,0,0,0.85);
+      z-index 300;
+      display flex;
+      align-items flex-end;
+      opacity 0;
+      pointer-events none;
+      transition opacity 0.25s;
+    }
+
+    .cart-overlay.open {
+      opacity 1;
+      pointer-events all;
+    }
+
+    .cart-sheet {
+      background var(--dark);
+      border 1px solid var(--border);
+      border-radius 24px 24px 0 0;
+      width 100%;
+      max-height 85vh;
+      overflow-y auto;
+      transform translateY(100%);
+      transition transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+      padding-bottom env(safe-area-inset-bottom);
+    }
+
+    .cart-overlay.open .cart-sheet {
+      transform translateY(0);
+    }
+
+    .cart-header {
+      padding 20px 16px 16px;
+      border-bottom 1px solid var(--border);
+      display flex;
+      align-items center;
+      justify-content space-between;
+    }
+
+    .cart-title {
+      font-family 'Unbounded', sans-serif;
+      font-size 14px;
+      font-weight 700;
+    }
+
+    .cart-close {
+      width 32px;
+      height 32px;
+      background var(--card);
+      border 1px solid var(--border);
+      border-radius 8px;
+      display flex;
+      align-items center;
+      justify-content center;
+      cursor pointer;
+      color var(--text-dim);
+      font-size 16px;
+    }
+
+    .cart-items {
+      padding 12px 16px;
+    }
+
+    .cart-item {
+      display flex;
+      align-items center;
+      gap 12px;
+      padding 12px 0;
+      border-bottom 1px solid var(--border);
+    }
+
+    .cart-itemlast-child { border-bottom none; }
+
+    .cart-item-emoji {
+      width 48px;
+      height 48px;
+      background var(--card);
+      border-radius 10px;
+      display flex;
+      align-items center;
+      justify-content center;
+      font-size 22px;
+      flex-shrink 0;
+      overflow hidden;
+    }
+
+    .cart-item-emoji img {
+      width 100%;
+      height 100%;
+      object-fit cover;
+    }
+
+    .cart-item-info { flex 1; min-width 0; }
+
+    .cart-item-name {
+      font-family 'Unbounded', sans-serif;
+      font-size 10px;
+      font-weight 600;
+      color var(--text);
+      margin-bottom 3px;
+      white-space nowrap;
+      overflow hidden;
+      text-overflow ellipsis;
+    }
+
+    .cart-item-variant {
+      font-size 11px;
+      color var(--text-muted);
+      margin-bottom 4px;
+    }
+
+    .cart-item-price {
+      font-family 'Bebas Neue', sans-serif;
+      font-size 16px;
+      color var(--green);
+      letter-spacing 1px;
+    }
+
+    .cart-item-qty {
+      display flex;
+      align-items center;
+      gap 0;
+      background var(--card);
+      border 1px solid var(--border);
+      border-radius 10px;
+      overflow hidden;
+    }
+
+    .cqb {
+      width 32px;
+      height 32px;
+      background transparent;
+      border none;
+      color var(--text);
+      font-size 16px;
+      cursor pointer;
+      display flex;
+      align-items center;
+      justify-content center;
+    }
+
+    .cqbactive { background var(--border); }
+
+    .cqv {
+      width 28px;
+      text-align center;
+      font-family 'Unbounded', sans-serif;
+      font-size 12px;
+      font-weight 600;
+    }
+
+    .cart-footer {
+      padding 16px;
+      border-top 1px solid var(--border);
+      background var(--dark);
+      position sticky;
+      bottom 0;
+    }
+
+    .cart-total {
+      display flex;
+      justify-content space-between;
+      align-items center;
+      margin-bottom 14px;
+    }
+
+    .cart-total-label {
+      font-size 12px;
+      color var(--text-muted);
+      font-weight 500;
+    }
+
+    .cart-total-price {
+      font-family 'Bebas Neue', sans-serif;
+      font-size 24px;
+      color var(--green);
+      letter-spacing 2px;
+    }
+
+    .cart-total-rub {
+      font-size 12px;
+      color var(--text-muted);
+      text-align right;
+    }
+
+    .buy-btn {
+      width 100%;
+      background var(--green);
+      color var(--black);
+      border none;
+      border-radius 14px;
+      padding 16px;
+      font-family 'Unbounded', sans-serif;
+      font-size 13px;
+      font-weight 700;
+      letter-spacing 1px;
+      cursor pointer;
+      transition all 0.15s;
+      text-transform uppercase;
+    }
+
+    .buy-btnactive { transform scale(0.97); filter brightness(0.9); }
+
+    .cart-empty {
+      padding 48px 16px;
+      text-align center;
+    }
+
+    .cart-empty-icon { font-size 48px; margin-bottom 12px; }
+    .cart-empty-text {
+      font-family 'Unbounded', sans-serif;
+      font-size 11px;
+      color var(--text-muted);
+      letter-spacing 1px;
+    }
+
+     БАННЕР СВЕРХУ 
+    .banner {
+      margin 0 16px 16px;
+      background linear-gradient(135deg, #0f1f0a, #1a2e10);
+      border 1px solid rgba(57,255,20,0.2);
+      border-radius 16px;
+      padding 14px 16px;
+      display flex;
+      align-items center;
+      gap 12px;
+    }
+
+    .banner-icon { font-size 24px; }
+
+    .banner-text {
+      font-size 12px;
+      color var(--text-dim);
+      line-height 1.5;
+    }
+
+    .banner-text b {
+      color var(--green);
+      font-weight 600;
+    }
+
+     АНИМАЦИИ 
+    @keyframes fadeIn {
+      from { opacity 0; transform translateY(10px); }
+      to { opacity 1; transform translateY(0); }
+    }
+
+    .product-card {
+      animation fadeIn 0.3s ease forwards;
+    }
+  style
+head
+body
+
+!-- ШАПКА --
+div class=header
+  div class=header-top
+    div class=logoHOOLIGANS spanSNGspandiv
+    button class=cart-btn id=cartBtn onclick=openCart()
+      🛒 Корзина
+      span class=cart-count id=cartCount style=displaynone0span
+    button
+  div
+  div class=categories id=categories
+    button class=cat-btn active onclick=filterCategory('all')Всеbutton
+    button class=cat-btn onclick=filterCategory('кастеты')Кастетыbutton
+    button class=cat-btn onclick=filterCategory('дубинки')Дубинкиbutton
+    button class=cat-btn onclick=filterCategory('подики')Подикиbutton
+    button class=cat-btn onclick=filterCategory('одноразки')Одноразкиbutton
+    button class=cat-btn onclick=filterCategory('жижи')Жижиbutton
+    button class=cat-btn onclick=filterCategory('прочее')Прочееbutton
+  div
+div
+
+!-- КОНТЕНТ --
+div class=content
+  div class=banner
+    div class=banner-icon💬div
+    div class=banner-textНет нужного товара bНапиши Асхеb — закажем под тебя!div
+  div
+
+  div class=section-title id=sectionTitleВсе товарыdiv
+
+  div id=productsContainer
+    div class=loader
+      div class=loader-ringdiv
+      div class=loader-textЗагрузка...div
+    div
+  div
+div
+
+!-- МОДАЛКА ТОВАРА --
+div class=modal-overlay id=modalOverlay onclick=closeModalOutside(event)
+  div class=modal id=modal
+    div class=modal-handlediv
+    div id=modalContentdiv
+  div
+div
+
+!-- КОРЗИНА --
+div class=cart-overlay id=cartOverlay onclick=closeCartOutside(event)
+  div class=cart-sheet id=cartSheet
+    div class=cart-header
+      div class=cart-title🛒 Корзинаdiv
+      div class=cart-close onclick=closeCart()✕div
+    div
+    div id=cartContentdiv
+  div
+div
+
+script
+   ===== КОНФИГ =====
+  const API_URL = http127.0.0.15000;  Замените на адрес PythonAnywhere после деплоя
+
+  const CATEGORY_EMOJI = {
+    'кастеты' '👊',
+    'дубинки' '🪄',
+    'подики' '💨',
+    'одноразки' '🔋',
+    'жижи' '💧',
+    'прочее' '📦',
+  };
+
+   ===== СОСТОЯНИЕ =====
+  let allProducts = [];
+  let currentCategory = 'all';
+  let cart = [];
+  let selectedProduct = null;
+  let selectedVariant = null;
+  let selectedQty = 1;
+
+   ===== ЗАГРУЗКА ТОВАРОВ =====
+  async function loadProducts() {
+    try {
+      const res = await fetch(`${API_URL}products`);
+      const data = await res.json();
+      if (data.ok) {
+        allProducts = data.products;
+        renderProducts(allProducts);
+      } else {
+        showError();
+      }
+    } catch (e) {
+      showError();
+    }
+  }
+
+  function showError() {
+    document.getElementById('productsContainer').innerHTML = `
+      div class=empty
+        div class=empty-icon⚠️div
+        div class=empty-textНе удалось загрузить товарыdiv
+      div
+    `;
+  }
+
+   ===== РЕНДЕР ТОВАРОВ =====
+  function renderProducts(products) {
+    const container = document.getElementById('productsContainer');
+
+    if (!products.length) {
+      container.innerHTML = `
+        div class=empty
+          div class=empty-icon📭div
+          div class=empty-textТоваров нетdiv
+        div
+      `;
+      return;
+    }
+
+    const inCartIds = new Set(cart.map(i = i.id));
+
+    container.innerHTML = `div class=products-grid
+      ${products.map((p, idx) = {
+        const emoji = CATEGORY_EMOJI[p.category]  '📦';
+        const inCart = inCartIds.has(p.id);
+        const imgHtml = p.image_url
+           `div class=product-imgimg src=${p.image_url} alt=${p.name} loading=lazy onerror=this.parentElement.innerHTML='div style='width100%;aspect-ratio1;displayflex;align-itemscenter;justify-contentcenter;font-size40px;backgroundlinear-gradient(135deg,#1a1a1a,#222)'${emoji}div'div`
+           `div class=product-img-placeholder${emoji}div`;
+
+        return `
+          div class=product-card ${inCart  'in-cart'  ''} onclick=openProduct(${p.id}) style=animation-delay${idx  0.05}s
+            ${inCart  'div class=in-cart-badgeВ корзинеdiv'  ''}
+            ${imgHtml}
+            div class=product-info
+              div class=product-name${p.name}div
+              div class=product-price${p.price_kzt.toLocaleString()} ₸div
+              div class=product-price-rub${p.price_rub.toLocaleString()} ₽div
+            div
+          div
+        `;
+      }).join('')}
+    div`;
+  }
+
+   ===== ФИЛЬТР =====
+  function filterCategory(cat) {
+    currentCategory = cat;
+
+    document.querySelectorAll('.cat-btn').forEach(b = b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const titleEl = document.getElementById('sectionTitle');
+    if (cat === 'all') {
+      titleEl.textContent = 'Все товары';
+      renderProducts(allProducts);
+    } else {
+      const names = {'кастеты''Кастеты','дубинки''Дубинки','подики''Подики','одноразки''Одноразки','жижи''Жижи','прочее''Прочее'};
+      titleEl.textContent = names[cat]  cat;
+      renderProducts(allProducts.filter(p = p.category === cat));
+    }
+  }
+
+   ===== ОТКРЫТЬ ТОВАР =====
+  function openProduct(id) {
+    const product = allProducts.find(p = p.id === id);
+    if (!product) return;
+
+    selectedProduct = product;
+    selectedVariant = null;
+    selectedQty = 1;
+
+    const emoji = CATEGORY_EMOJI[product.category]  '📦';
+    const variants = product.variants  product.variants.split(',').map(v = v.trim()).filter(Boolean)  [];
+    const cartItem = cart.find(i = i.id === id);
+    const inCart = !!cartItem;
+
+    const imgHtml = product.image_url
+       `img class=modal-img src=${product.image_url} alt=${product.name} onerror=this.outerHTML='div class='modal-img-placeholder'${emoji}div'`
+       `div class=modal-img-placeholder${emoji}div`;
+
+    document.getElementById('modalContent').innerHTML = `
+      ${imgHtml}
+      div class=modal-body
+        div class=modal-category${product.category}div
+        div class=modal-name${product.name}div
+        div class=modal-price${product.price_kzt.toLocaleString()} ₸div
+        div class=modal-price-rub${product.price_rub.toLocaleString()} ₽div
+        ${product.description  `div class=modal-desc${product.description}div`  ''}
+
+        ${variants.length  `
+          div class=variants-titleВыбери вариантdiv
+          div class=variants-list
+            ${variants.map(v = `button class=variant-btn onclick=selectVariant(this,'${v}')${v}button`).join('')}
+          div
+        `  ''}
+
+        div class=qty-row
+          div class=qty-labelКоличествоdiv
+          div class=qty-controls
+            button class=qty-btn onclick=changeQty(-1)−button
+            div class=qty-val id=qtyVal1div
+            button class=qty-btn onclick=changeQty(1)+button
+          div
+        div
+
+        button class=add-btn ${inCart  'added'  ''} id=addBtn onclick=addToCart()
+          ${inCart  '✓ Уже в корзине'  '+ Добавить в корзину'}
+        button
+      div
+    `;
+
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function selectVariant(btn, variant) {
+    document.querySelectorAll('.variant-btn').forEach(b = b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedVariant = variant;
+  }
+
+  function changeQty(delta) {
+    selectedQty = Math.max(1, Math.min(99, selectedQty + delta));
+    document.getElementById('qtyVal').textContent = selectedQty;
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+   ===== КОРЗИНА =====
+  function addToCart() {
+    if (!selectedProduct) return;
+
+    const existing = cart.find(i = i.id === selectedProduct.id && i.variant === selectedVariant);
+    if (existing) {
+      existing.qty += selectedQty;
+    } else {
+      cart.push({
+        id selectedProduct.id,
+        name selectedProduct.name,
+        price_kzt selectedProduct.price_kzt,
+        price_rub selectedProduct.price_rub,
+        image_url selectedProduct.image_url,
+        category selectedProduct.category,
+        variant selectedVariant,
+        qty selectedQty
+      });
+    }
+
+    updateCartBtn();
+    renderProducts(currentCategory === 'all'  allProducts  allProducts.filter(p = p.category === currentCategory));
+
+    const btn = document.getElementById('addBtn');
+    btn.textContent = '✓ Добавлено!';
+    btn.classList.add('added');
+    setTimeout(closeModal, 600);
+  }
+
+  function updateCartBtn() {
+    const total = cart.reduce((s, i) = s + i.qty, 0);
+    const btn = document.getElementById('cartBtn');
+    const count = document.getElementById('cartCount');
+
+    if (total  0) {
+      btn.classList.add('has-items');
+      count.style.display = 'flex';
+      count.textContent = total;
+    } else {
+      btn.classList.remove('has-items');
+      count.style.display = 'none';
+    }
+  }
+
+  function openCart() {
+    renderCart();
+    document.getElementById('cartOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCart() {
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeCartOutside(e) {
+    if (e.target === document.getElementById('cartOverlay')) closeCart();
+  }
+
+  function renderCart() {
+    const container = document.getElementById('cartContent');
+
+    if (!cart.length) {
+      container.innerHTML = `
+        div class=cart-empty
+          div class=cart-empty-icon🛒div
+          div class=cart-empty-textКорзина пустаяdiv
+        div
+      `;
+      return;
+    }
+
+    const totalKzt = cart.reduce((s, i) = s + i.price_kzt  i.qty, 0);
+    const totalRub = cart.reduce((s, i) = s + i.price_rub  i.qty, 0);
+    const emoji_map = CATEGORY_EMOJI;
+
+    container.innerHTML = `
+      div class=cart-items
+        ${cart.map((item, idx) = {
+          const emoji = emoji_map[item.category]  '📦';
+          const thumbHtml = item.image_url
+             `img src=${item.image_url} style=width100%;height100%;object-fitcover;border-radius10px onerror=this.outerHTML='${emoji}'`
+             emoji;
+          return `
+            div class=cart-item
+              div class=cart-item-emoji${thumbHtml}div
+              div class=cart-item-info
+                div class=cart-item-name${item.name}div
+                ${item.variant  `div class=cart-item-variant${item.variant}div`  ''}
+                div class=cart-item-price${(item.price_kzt  item.qty).toLocaleString()} ₸div
+              div
+              div class=cart-item-qty
+                button class=cqb onclick=cartQty(${idx},-1)−button
+                div class=cqv${item.qty}div
+                button class=cqb onclick=cartQty(${idx},1)+button
+              div
+            div
+          `;
+        }).join('')}
+      div
+      div class=cart-footer
+        div class=cart-total
+          div class=cart-total-labelИтогоdiv
+          div
+            div class=cart-total-price${totalKzt.toLocaleString()} ₸div
+            div class=cart-total-rub${totalRub.toLocaleString()} ₽div
+          div
+        div
+        button class=buy-btn onclick=checkout()💳 Оформить заказbutton
+      div
+    `;
+  }
+
+  function cartQty(idx, delta) {
+    cart[idx].qty = Math.max(0, cart[idx].qty + delta);
+    if (cart[idx].qty === 0) cart.splice(idx, 1);
+    updateCartBtn();
+    renderCart();
+    renderProducts(currentCategory === 'all'  allProducts  allProducts.filter(p = p.category === currentCategory));
+  }
+
+   ===== ОФОРМЛЕНИЕ =====
+  function checkout() {
+    if (!cart.length) return;
+
+    const totalKzt = cart.reduce((s, i) = s + i.price_kzt  i.qty, 0);
+    const totalRub = cart.reduce((s, i) = s + i.price_rub  i.qty, 0);
+
+    const data = {
+      items cart.map(i = ({
+        id i.id,
+        name i.name,
+        variant i.variant,
+        qty i.qty,
+        price_kzt i.price_kzt,
+        price_rub i.price_rub
+      })),
+      total_kzt totalKzt,
+      total_rub totalRub
+    };
+
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.sendData(JSON.stringify(data));
+    } else {
+      alert('Открой магазин через Telegram бота!');
+    }
+  }
+
+   ===== TELEGRAM WEBAPP INIT =====
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.ready();
+    window.Telegram.WebApp.expand();
+  }
+
+   ===== СТАРТ =====
+  loadProducts();
+script
+body
+html
+```
