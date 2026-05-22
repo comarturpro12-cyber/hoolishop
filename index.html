@@ -7,311 +7,288 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Unbounded:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #080808;
-  --surface: #101010;
-  --card: #141414;
-  --card2: #181818;
-  --border: rgba(255,255,255,0.06);
-  --border2: rgba(255,255,255,0.1);
-  --green: #3dff1a;
-  --green2: #2ecc12;
-  --green-a10: rgba(61,255,26,0.1);
-  --green-a05: rgba(61,255,26,0.05);
-  --text: #f2f2f2;
-  --text2: #888;
+  --bg: #0e0e0e;
+  --surface: #161616;
+  --card: #1c1c1c;
+  --card2: #222;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.13);
+  --green: #4eff2a;
+  --green2: #39dd1e;
+  --green-dim: rgba(78,255,42,0.12);
+  --green-glow: rgba(78,255,42,0.18);
+  --accent: #c8ff00;
+  --text: #f5f5f5;
+  --text2: #999;
   --text3: #555;
+  --nav-h: 72px;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* SCAN LINE texture overlay */
-body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9999}
-
 /* HEADER */
-.hdr{position:sticky;top:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
-.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 10px}
-.logo-wrap{display:flex;align-items:center;gap:10px}
-.logo-icon{width:32px;height:32px;flex-shrink:0}
-.logo-text{display:flex;flex-direction:column;line-height:1}
-.logo-main{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--green)}
-.logo-sub{font-family:'Unbounded',sans-serif;font-size:7px;letter-spacing:4px;color:var(--text3);text-transform:uppercase;margin-top:1px}
+.hdr{position:sticky;top:0;z-index:100;background:rgba(14,14,14,0.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:13px 16px 11px;display:flex;align-items:center;justify-content:space-between}
+.logo-wrap{display:flex;align-items:center;gap:9px}
+.logo-star{position:relative;width:34px;height:34px;flex-shrink:0}
+.logo-star svg{width:34px;height:34px}
+.logo-text{line-height:1}
+.logo-main{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:3.5px;background:linear-gradient(90deg,#4eff2a,#c8ff00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-sub{font-family:'Unbounded',sans-serif;font-size:6.5px;letter-spacing:4px;color:var(--text3);margin-top:1px}
 
-.cart-btn{position:relative;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:8px 14px;color:var(--text2);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
-.cart-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.cart-btn.active{border-color:var(--green);color:var(--green)}
-.cart-count{background:var(--green);color:#000;font-size:10px;font-weight:700;border-radius:6px;padding:1px 6px;font-family:'Unbounded',sans-serif;display:none}
-.cart-btn.active .cart-count{display:block}
-
-/* CATEGORIES */
-.cats{display:flex;gap:6px;overflow-x:auto;padding:0 16px 12px;scrollbar-width:none}
-.cats::-webkit-scrollbar{display:none}
-.cat{flex-shrink:0;display:flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--border);border-radius:20px;padding:6px 12px;color:var(--text3);font-family:'Inter',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap}
-.cat svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.cat.on{background:var(--green);border-color:var(--green);color:#000;font-weight:600}
-.cat.on svg{stroke:#000}
-.cat:active{transform:scale(.93)}
+.cart-pill{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:8px 14px;cursor:pointer;transition:all .2s;font-size:13px;color:var(--text2);font-weight:500}
+.cart-pill svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.cart-pill.has{border-color:var(--green);color:var(--green)}
+.cart-badge{background:var(--green);color:#000;font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;border-radius:6px;padding:2px 6px;display:none}
+.cart-pill.has .cart-badge{display:block}
 
 /* CONTENT */
-.content{padding:16px;padding-bottom:140px}
-.sec-label{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+.content{padding:14px 14px calc(var(--nav-h) + 24px)}
 
 /* BANNER */
-.banner{background:linear-gradient(135deg,rgba(61,255,26,0.06),rgba(61,255,26,0.02));border:1px solid rgba(61,255,26,0.15);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.banner-ico{width:36px;height:36px;background:rgba(61,255,26,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.banner-ico svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.banner-t{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:600;color:var(--text);margin-bottom:3px}
-.banner-s{font-size:11px;color:var(--text2);line-height:1.5}
-.banner-s span{color:var(--green);font-weight:500}
+.banner{background:linear-gradient(135deg,rgba(78,255,42,0.08) 0%,rgba(200,255,0,0.04) 100%);border:1px solid rgba(78,255,42,0.2);border-radius:16px;padding:13px 14px;display:flex;align-items:center;gap:11px;margin-bottom:18px}
+.ban-ico{width:38px;height:38px;background:rgba(78,255,42,0.12);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ban-ico svg{width:19px;height:19px;stroke:var(--green);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ban-t{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;color:var(--text);margin-bottom:3px;letter-spacing:.3px}
+.ban-s{font-size:11px;color:var(--text2);line-height:1.5}
+.ban-s b{color:var(--green);font-weight:600}
+
+/* SECTION LABEL */
+.sec-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.sec-label{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;color:var(--text);letter-spacing:.5px}
+.sec-count{font-size:11px;color:var(--text3)}
 
 /* GRID */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s;position:relative;animation:fadeUp .4s ease both}
-.card:active{transform:scale(.96)}
-.card.in-cart{border-color:rgba(61,255,26,0.4)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .18s,border-color .2s,box-shadow .2s;position:relative;animation:up .35s ease both}
+.card:active{transform:scale(.95)}
+.card.in-cart{border-color:rgba(78,255,42,0.45);box-shadow:0 0 20px rgba(78,255,42,0.08)}
+
 .card-img{width:100%;aspect-ratio:1;background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-.card:active .card-img img{transform:scale(1.05)}
-.card-img-ph{width:100%;aspect-ratio:1;background:var(--card2);display:flex;align-items:center;justify-content:center}
-.card-img-ph svg{width:52px;height:52px;stroke:var(--text3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.card-body{padding:10px}
-.card-name{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:6px}
-.card-price{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--green);letter-spacing:1px;line-height:1}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .25s}
+.card:active .card-img img{transform:scale(1.06)}
+.card-img-ph{width:100%;aspect-ratio:1;background:linear-gradient(145deg,#1a1a1a,#242424);display:flex;align-items:center;justify-content:center}
+.card-img-ph svg{width:54px;height:54px;stroke:rgba(255,255,255,0.15);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+
+/* COLOR STRIP ON TOP OF CARD */
+.card-strip{height:3px;width:100%;background:linear-gradient(90deg,var(--green),var(--accent))}
+
+.card-body{padding:11px}
+.card-name{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:7px;min-height:28px}
+.card-price{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;line-height:1;background:linear-gradient(90deg,var(--green),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .card-rub{font-size:10px;color:var(--text3);margin-top:2px}
-.badge-cart{position:absolute;top:8px;right:8px;background:var(--green);color:#000;font-size:9px;font-weight:700;border-radius:6px;padding:3px 7px;font-family:'Unbounded',sans-serif;letter-spacing:.5px}
+
+.in-cart-badge{position:absolute;top:9px;right:9px;background:var(--green);color:#000;font-family:'Unbounded',sans-serif;font-size:8px;font-weight:700;border-radius:6px;padding:3px 7px;letter-spacing:.5px}
+
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* BOTTOM NAV */
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(14,14,14,0.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);height:var(--nav-h);display:flex;align-items:stretch;padding:0 4px;padding-bottom:env(safe-area-inset-bottom)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:all .15s;border-radius:14px;margin:6px 3px;padding:4px 2px;position:relative}
+.nav-item:active{transform:scale(.9)}
+.nav-item.on{background:var(--green-dim)}
+.nav-ico{width:24px;height:24px;display:flex;align-items:center;justify-content:center}
+.nav-ico svg{width:22px;height:22px;stroke:var(--text3);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke .15s}
+.nav-item.on .nav-ico svg{stroke:var(--green)}
+.nav-label{font-family:'Inter',sans-serif;font-size:9px;font-weight:600;color:var(--text3);letter-spacing:.3px;transition:color .15s;text-transform:uppercase}
+.nav-item.on .nav-label{color:var(--green)}
+.nav-dot{position:absolute;top:6px;width:4px;height:4px;background:var(--green);border-radius:50%;opacity:0;transition:opacity .15s}
+.nav-item.on .nav-dot{opacity:1}
 
 /* LOADER */
-.loader-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:14px}
-.loader-ring{width:36px;height:36px;border:1.5px solid var(--border2);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite}
-.loader-txt{font-family:'Unbounded',sans-serif;font-size:9px;color:var(--text3);letter-spacing:3px}
+.loader-wrap{display:flex;flex-direction:column;align-items:center;padding:70px 0;gap:14px}
+.loader-ring{width:38px;height:38px;border:1.5px solid var(--border2);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.loader-t{font-family:'Unbounded',sans-serif;font-size:9px;color:var(--text3);letter-spacing:3px}
 
 /* EMPTY */
 .empty-wrap{text-align:center;padding:60px 16px}
-.empty-ico{margin:0 auto 14px;width:56px;height:56px;background:var(--card);border-radius:16px;display:flex;align-items:center;justify-content:center}
-.empty-ico svg{width:28px;height:28px;stroke:var(--text3);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.empty-t{font-family:'Unbounded',sans-serif;font-size:11px;color:var(--text3);letter-spacing:1px}
+.empty-ico{width:58px;height:58px;background:var(--card);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.empty-ico svg{width:28px;height:28px;stroke:var(--text3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:1.5px}
 
-/* OVERLAY BASE */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:200;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .25s}
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:300;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s}
 .overlay.on{opacity:1;pointer-events:all}
-.sheet{background:var(--surface);border:1px solid var(--border);border-radius:22px 22px 0 0;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1)}
+.sheet{background:var(--surface);border:1px solid var(--border2);border-radius:24px 24px 0 0;width:100%;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.25,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
 .overlay.on .sheet{transform:translateY(0)}
-.drag-handle{width:32px;height:3px;background:var(--border2);border-radius:2px;margin:10px auto 0}
+.drag{width:36px;height:3px;background:var(--border2);border-radius:2px;margin:11px auto 0}
 
 /* PRODUCT MODAL */
-.pmod-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--card)}
-.pmod-img-ph{width:100%;aspect-ratio:4/3;background:var(--card);display:flex;align-items:center;justify-content:center}
-.pmod-img-ph svg{width:80px;height:80px;stroke:var(--text3);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
-.pmod-body{padding:18px 16px 24px}
-.pmod-cat{font-size:10px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
-.pmod-name{font-family:'Unbounded',sans-serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:10px}
-.pmod-price{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--green);letter-spacing:2px;line-height:1}
-.pmod-rub{font-size:13px;color:var(--text2);margin-top:3px;margin-bottom:16px}
-.pmod-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:20px}
-.row-label{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px}
+.pmod-img-wrap{position:relative;width:100%}
+.pmod-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.pmod-img-ph{width:100%;aspect-ratio:4/3;background:linear-gradient(145deg,#1a1a1a,#252525);display:flex;align-items:center;justify-content:center}
+.pmod-img-ph svg{width:90px;height:90px;stroke:rgba(255,255,255,0.1);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.pmod-img-gradient{position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(transparent,var(--surface))}
+
+.pmod-body{padding:16px 16px 24px}
+.pmod-cat{display:inline-flex;align-items:center;gap:5px;background:var(--green-dim);border:1px solid rgba(78,255,42,0.25);border-radius:8px;padding:4px 10px;margin-bottom:10px}
+.pmod-cat-t{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;color:var(--green);letter-spacing:1.5px;text-transform:uppercase}
+.pmod-name{font-family:'Unbounded',sans-serif;font-size:18px;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:12px}
+.pmod-prices{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.pmod-kzt{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;background:linear-gradient(90deg,var(--green),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.pmod-rub{font-size:14px;color:var(--text2)}
+.pmod-desc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+
+.row-lbl{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px}
 .variants{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
 .var-btn{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:7px 14px;color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
-.var-btn.on{border-color:var(--green);color:var(--green);background:var(--green-a05)}
-.qty-row{display:flex;align-items:center;gap:14px;margin-bottom:20px}
-.qty-ctrl{display:flex;align-items:center;background:var(--card);border:1px solid var(--border2);border-radius:12px;overflow:hidden}
-.qb{width:40px;height:40px;background:transparent;border:none;color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
-.qb:active{background:var(--border2)}
-.qv{width:36px;text-align:center;font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;color:var(--text)}
-.add-btn{width:100%;background:var(--green);color:#000;border:none;border-radius:13px;padding:16px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px}
-.add-btn svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.add-btn:active{transform:scale(.97);filter:brightness(.9)}
-.add-btn.done{background:var(--green2)}
+.var-btn.on{border-color:var(--green);color:var(--green);background:var(--green-dim)}
 
-/* CART */
+.qty-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.qty-ctrl{display:flex;align-items:center;background:var(--card);border:1px solid var(--border2);border-radius:13px;overflow:hidden}
+.qb{width:42px;height:42px;background:transparent;border:none;color:var(--text);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s}
+.qb:active{background:var(--border2)}
+.qv{width:38px;text-align:center;font-family:'Unbounded',sans-serif;font-size:14px;font-weight:600;color:var(--text)}
+
+.add-btn{width:100%;background:linear-gradient(135deg,var(--green),var(--accent));color:#000;border:none;border-radius:14px;padding:16px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px}
+.add-btn svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.add-btn:active{transform:scale(.97);filter:brightness(.92)}
+.add-btn.done{background:linear-gradient(135deg,#2ecc12,#8ecf00)}
+
+/* CART SHEET */
 .cart-hdr{padding:18px 16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.cart-title{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700}
-.close-btn{width:30px;height:30px;background:var(--card);border:1px solid var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2)}
-.close-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-.cart-items{padding:8px 16px}
-.ci{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border)}
+.cart-title{font-family:'Unbounded',sans-serif;font-size:14px;font-weight:700}
+.close-x{width:32px;height:32px;background:var(--card);border:1px solid var(--border2);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.close-x svg{width:14px;height:14px;stroke:var(--text2);fill:none;stroke-width:2;stroke-linecap:round}
+
+.cart-items{padding:6px 16px}
+.ci{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--border)}
 .ci:last-child{border-bottom:none}
-.ci-thumb{width:46px;height:46px;background:var(--card);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.ci-thumb{width:50px;height:50px;background:var(--card);border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .ci-thumb img{width:100%;height:100%;object-fit:cover}
-.ci-thumb svg{width:22px;height:22px;stroke:var(--text3);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ci-thumb svg{width:24px;height:24px;stroke:var(--text3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .ci-info{flex:1;min-width:0}
-.ci-name{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.ci-var{font-size:10px;color:var(--text3);margin-bottom:3px}
-.ci-price{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--green);letter-spacing:1px}
+.ci-name{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.ci-var{font-size:10px;color:var(--text3);margin-bottom:4px}
+.ci-price{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;background:linear-gradient(90deg,var(--green),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .ci-qty{display:flex;align-items:center;background:var(--card);border:1px solid var(--border2);border-radius:10px;overflow:hidden}
-.cqb{width:30px;height:30px;background:transparent;border:none;color:var(--text);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cqb{width:32px;height:32px;background:transparent;border:none;color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .cqb:active{background:var(--border2)}
-.cqv{width:24px;text-align:center;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:600}
-.cart-foot{padding:14px 16px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--surface)}
-.total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.total-label{font-size:12px;color:var(--text2)}
-.total-kzt{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--green);letter-spacing:2px}
-.total-rub{font-size:11px;color:var(--text3);text-align:right}
-.buy-btn{width:100%;background:var(--green);color:#000;border:none;border-radius:13px;padding:15px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px}
+.cqv{width:26px;text-align:center;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:600}
+
+.cart-foot{padding:14px 16px 20px;border-top:1px solid var(--border);background:var(--surface);position:sticky;bottom:0}
+.total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.total-lbl{font-size:12px;color:var(--text2);font-weight:500}
+.total-r{text-align:right}
+.total-kzt{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;background:linear-gradient(90deg,var(--green),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.total-rub{font-size:11px;color:var(--text3);margin-top:2px}
+.buy-btn{width:100%;background:linear-gradient(135deg,var(--green),var(--accent));color:#000;border:none;border-radius:14px;padding:16px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px}
 .buy-btn svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.buy-btn:active{transform:scale(.97);filter:brightness(.9)}
-.cart-empty-wrap{padding:48px 16px;text-align:center}
-.cart-empty-wrap svg{width:44px;height:44px;stroke:var(--text3);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 12px;display:block}
+.buy-btn:active{transform:scale(.97);filter:brightness(.92)}
+.cart-empty-wrap{padding:52px 16px;text-align:center}
+.cart-empty-wrap svg{width:46px;height:46px;stroke:var(--text3);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 14px;display:block}
 .cart-empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:2px}
 </style>
 </head>
 <body>
 
-<!-- SVG DEFS (кастомные иконки) -->
-<svg style="display:none">
-  <symbol id="ico-logo" viewBox="0 0 32 32">
-    <polygon points="16,2 20,10 29,11 22,18 24,27 16,23 8,27 10,18 3,11 12,10" stroke-width="1.5" stroke-linejoin="round"/>
-    <circle cx="16" cy="16" r="4" stroke-width="1.5"/>
-  </symbol>
-  <symbol id="ico-cart" viewBox="0 0 24 24">
-    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-    <line x1="3" y1="6" x2="21" y2="6"/>
-    <path d="M16 10a4 4 0 01-8 0"/>
-  </symbol>
-  <symbol id="ico-msg" viewBox="0 0 24 24">
-    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-  </symbol>
-  <symbol id="ico-knuckle" viewBox="0 0 24 24">
-    <rect x="2" y="10" width="20" height="10" rx="2"/>
-    <path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/>
-    <line x1="8" y1="10" x2="8" y2="20"/>
-    <line x1="12" y1="10" x2="12" y2="20"/>
-    <line x1="16" y1="10" x2="16" y2="20"/>
-    <circle cx="4" cy="8" r="1.5"/>
-  </symbol>
-  <symbol id="ico-baton" viewBox="0 0 24 24">
-    <line x1="5" y1="19" x2="19" y2="5" stroke-width="3" stroke-linecap="round"/>
-    <circle cx="6" cy="18" r="3"/>
-  </symbol>
-  <symbol id="ico-pod" viewBox="0 0 24 24">
-    <rect x="7" y="2" width="10" height="18" rx="3"/>
-    <rect x="9" y="5" width="6" height="3" rx="1"/>
-    <circle cx="12" cy="17" r="1"/>
-    <path d="M7 9h10"/>
-  </symbol>
-  <symbol id="ico-disposable" viewBox="0 0 24 24">
-    <rect x="8" y="2" width="8" height="20" rx="2"/>
-    <rect x="10" y="4" width="4" height="6" rx="1"/>
-    <line x1="10" y1="14" x2="14" y2="14"/>
-    <line x1="10" y1="17" x2="14" y2="17"/>
-    <path d="M8 2h8" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="ico-liquid" viewBox="0 0 24 24">
-    <path d="M12 2C12 2 4 10 4 14a8 8 0 0016 0c0-4-8-12-8-12z"/>
-    <path d="M9 17c0 1.66 1.34 3 3 3"/>
-  </symbol>
-  <symbol id="ico-box" viewBox="0 0 24 24">
-    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-    <line x1="12" y1="22.08" x2="12" y2="12"/>
-  </symbol>
-  <symbol id="ico-check" viewBox="0 0 24 24">
-    <polyline points="20 6 9 17 4 12"/>
-  </symbol>
-  <symbol id="ico-plus" viewBox="0 0 24 24">
-    <line x1="12" y1="5" x2="12" y2="19"/>
-    <line x1="5" y1="12" x2="19" y2="12"/>
-  </symbol>
-  <symbol id="ico-x" viewBox="0 0 24 24">
-    <line x1="18" y1="6" x2="6" y2="18"/>
-    <line x1="6" y1="6" x2="18" y2="18"/>
-  </symbol>
-  <symbol id="ico-spark" viewBox="0 0 24 24">
-    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-  </symbol>
-  <symbol id="ico-all" viewBox="0 0 24 24">
-    <rect x="3" y="3" width="7" height="7" rx="1"/>
-    <rect x="14" y="3" width="7" height="7" rx="1"/>
-    <rect x="3" y="14" width="7" height="7" rx="1"/>
-    <rect x="14" y="14" width="7" height="7" rx="1"/>
-  </symbol>
-</svg>
-
 <!-- HEADER -->
 <div class="hdr">
-  <div class="hdr-top">
-    <div class="logo-wrap">
-      <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="#3dff1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="16,2 20,10 29,11 22,18 24,27 16,23 8,27 10,18 3,11 12,10"/>
-        <circle cx="16" cy="16" r="3.5"/>
+  <div class="logo-wrap">
+    <div class="logo-star">
+      <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lg1" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#4eff2a"/>
+            <stop offset="100%" stop-color="#c8ff00"/>
+          </linearGradient>
+        </defs>
+        <polygon points="17,2 21,12 31,13 23,20 26,30 17,25 8,30 11,20 3,13 13,12" stroke="url(#lg1)" stroke-width="1.5" stroke-linejoin="round" fill="rgba(78,255,42,0.08)"/>
+        <circle cx="17" cy="17" r="3.5" stroke="url(#lg1)" stroke-width="1.5"/>
       </svg>
-      <div class="logo-text">
-        <span class="logo-main">HOOLIGANS</span>
-        <span class="logo-sub">SNG SHOP</span>
-      </div>
     </div>
-    <button class="cart-btn" id="cartBtn" onclick="openCart()">
-      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <span id="cartCount" class="cart-count">0</span>
-    </button>
+    <div class="logo-text">
+      <div class="logo-main">HOOLIGANS</div>
+      <div class="logo-sub">SNG SHOP</div>
+    </div>
   </div>
-  <div class="cats" id="cats">
-    <button class="cat on" data-cat="all" onclick="setcat(this,'all')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Все
-    </button>
-    <button class="cat" data-cat="кастеты" onclick="setcat(this,'кастеты')">
-      <svg viewBox="0 0 24 24"><rect x="2" y="10" width="20" height="10" rx="2"/><path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/><line x1="8" y1="10" x2="8" y2="20"/><line x1="12" y1="10" x2="12" y2="20"/><line x1="16" y1="10" x2="16" y2="20"/></svg>
-      Кастеты
-    </button>
-    <button class="cat" data-cat="дубинки" onclick="setcat(this,'дубинки')">
-      <svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5" stroke-width="3" stroke-linecap="round"/><circle cx="6" cy="18" r="3"/></svg>
-      Дубинки
-    </button>
-    <button class="cat" data-cat="подики" onclick="setcat(this,'подики')">
-      <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="3" rx="1"/><circle cx="12" cy="17" r="1"/><path d="M7 9h10"/></svg>
-      Подики
-    </button>
-    <button class="cat" data-cat="одноразки" onclick="setcat(this,'одноразки')">
-      <svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="20" rx="2"/><rect x="10" y="4" width="4" height="6" rx="1"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="10" y1="17" x2="14" y2="17"/></svg>
-      Одноразки
-    </button>
-    <button class="cat" data-cat="жижи" onclick="setcat(this,'жижи')">
-      <svg viewBox="0 0 24 24"><path d="M12 2C12 2 4 10 4 14a8 8 0 0016 0c0-4-8-12-8-12z"/><path d="M9 17c0 1.66 1.34 3 3 3"/></svg>
-      Жижи
-    </button>
-    <button class="cat" data-cat="прочее" onclick="setcat(this,'прочее')">
-      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-      Прочее
-    </button>
+  <div class="cart-pill" id="cartBtn" onclick="openCart()">
+    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    <span id="cartBadge" class="cart-badge">0</span>
   </div>
 </div>
 
 <!-- CONTENT -->
 <div class="content">
   <div class="banner">
-    <div class="banner-ico">
+    <div class="ban-ico">
       <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
     </div>
     <div>
-      <div class="banner-t">Нет нужного товара?</div>
-      <div class="banner-s">Напиши <span>Асхе</span> — закажем под тебя</div>
+      <div class="ban-t">Нет нужного товара?</div>
+      <div class="ban-s">Напиши <b>Асхе</b> — закажем специально под тебя</div>
     </div>
   </div>
-  <div class="sec-label" id="secLabel">Все товары</div>
+
+  <div class="sec-row">
+    <div class="sec-label" id="secLabel">Кастеты</div>
+    <div class="sec-count" id="secCount"></div>
+  </div>
+
   <div id="container">
     <div class="loader-wrap">
       <div class="loader-ring"></div>
-      <div class="loader-txt">Загрузка</div>
+      <div class="loader-t">Загрузка</div>
     </div>
   </div>
 </div>
 
+<!-- BOTTOM NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-item on" data-cat="кастеты" onclick="navClick(this,'кастеты')">
+    <div class="nav-dot"></div>
+    <div class="nav-ico">
+      <svg viewBox="0 0 24 24"><rect x="2" y="10" width="20" height="10" rx="2"/><path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/><line x1="8" y1="10" x2="8" y2="20"/><line x1="12" y1="10" x2="12" y2="20"/><line x1="16" y1="10" x2="16" y2="20"/></svg>
+    </div>
+    <div class="nav-label">Кастеты</div>
+  </div>
+  <div class="nav-item" data-cat="дубинки" onclick="navClick(this,'дубинки')">
+    <div class="nav-dot"></div>
+    <div class="nav-ico">
+      <svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5" stroke-width="2.8" stroke-linecap="round"/><circle cx="6.5" cy="17.5" r="3"/></svg>
+    </div>
+    <div class="nav-label">Дубинки</div>
+  </div>
+  <div class="nav-item" data-cat="подики" onclick="navClick(this,'подики')">
+    <div class="nav-dot"></div>
+    <div class="nav-ico">
+      <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="3" rx="1"/><circle cx="12" cy="17" r="1"/><line x1="7" y1="9" x2="17" y2="9"/></svg>
+    </div>
+    <div class="nav-label">Подики</div>
+  </div>
+  <div class="nav-item" data-cat="одноразки" onclick="navClick(this,'одноразки')">
+    <div class="nav-dot"></div>
+    <div class="nav-ico">
+      <svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="20" rx="2"/><rect x="10" y="4" width="4" height="6" rx="1"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="10" y1="17" x2="14" y2="17"/></svg>
+    </div>
+    <div class="nav-label">Одноразки</div>
+  </div>
+  <div class="nav-item" data-cat="прочее" onclick="navClick(this,'прочее')">
+    <div class="nav-dot"></div>
+    <div class="nav-ico">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    </div>
+    <div class="nav-label">Прочее</div>
+  </div>
+</nav>
+
 <!-- PRODUCT MODAL -->
 <div class="overlay" id="prodOverlay" onclick="closeModOut(event)">
-  <div class="sheet" id="prodSheet">
-    <div class="drag-handle"></div>
+  <div class="sheet">
+    <div class="drag"></div>
     <div id="prodContent"></div>
   </div>
 </div>
 
 <!-- CART -->
 <div class="overlay" id="cartOverlay" onclick="closeCartOut(event)">
-  <div class="sheet" id="cartSheet">
-    <div class="drag-handle"></div>
+  <div class="sheet">
+    <div class="drag"></div>
     <div class="cart-hdr">
       <div class="cart-title">Корзина</div>
-      <div class="close-btn" onclick="closeCart()">
+      <div class="close-x" onclick="closeCart()">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </div>
     </div>
@@ -322,47 +299,50 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 <script>
 const API = "http://127.0.0.1:5000";
 
-const CAT_ICONS = {
+const CAT_ICO = {
   'кастеты': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10" width="20" height="10" rx="2"/><path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/><line x1="8" y1="10" x2="8" y2="20"/><line x1="12" y1="10" x2="12" y2="20"/><line x1="16" y1="10" x2="16" y2="20"/></svg>`,
-  'дубинки': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5" stroke-width="3"/><circle cx="6" cy="18" r="3"/></svg>`,
-  'подики': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="3" rx="1"/><circle cx="12" cy="17" r="1"/><path d="M7 9h10"/></svg>`,
+  'дубинки': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5" stroke-width="2.8"/><circle cx="6.5" cy="17.5" r="3"/></svg>`,
+  'подики': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="3" rx="1"/><circle cx="12" cy="17" r="1"/><line x1="7" y1="9" x2="17" y2="9"/></svg>`,
   'одноразки': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="20" rx="2"/><rect x="10" y="4" width="4" height="6" rx="1"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="10" y1="17" x2="14" y2="17"/></svg>`,
-  'жижи': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C12 2 4 10 4 14a8 8 0 0016 0c0-4-8-12-8-12z"/><path d="M9 17c0 1.66 1.34 3 3 3"/></svg>`,
-  'прочее': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+  'прочее': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>`,
 };
 
-const CAT_NAMES = {'all':'Все товары','кастеты':'Кастеты','дубинки':'Дубинки','подики':'Подики','одноразки':'Одноразки','жижи':'Жижи','прочее':'Прочее'};
+const CAT_NAMES = {'кастеты':'Кастеты','дубинки':'Дубинки','подики':'Подики','одноразки':'Одноразки','прочее':'Прочее'};
 
-let products = [], curCat = 'all', cart = [], selProd = null, selVar = null, selQty = 1;
+let products=[], curCat='кастеты', cart=[], selProd=null, selVar=null, selQty=1;
 
 async function loadProducts() {
   try {
     const r = await fetch(`${API}/products`);
     const d = await r.json();
-    if (d.ok) { products = d.products; render(products); }
+    if (d.ok) { products=d.products; render(curCat); }
     else showErr();
   } catch(e) { showErr(); }
 }
 
 function showErr() {
-  document.getElementById('container').innerHTML = `<div class="empty-wrap"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="empty-t">Ошибка загрузки</div></div>`;
+  document.getElementById('container').innerHTML=`<div class="empty-wrap"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="empty-t">Ошибка загрузки</div></div>`;
 }
 
-function render(list) {
-  const c = document.getElementById('container');
+function render(cat) {
+  const list = products.filter(p=>p.category===cat);
+  document.getElementById('secLabel').textContent = CAT_NAMES[cat]||cat;
+  document.getElementById('secCount').textContent = list.length ? `${list.length} товаров` : '';
+  const c=document.getElementById('container');
   if (!list.length) {
-    c.innerHTML = `<div class="empty-wrap"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div class="empty-t">Товаров нет</div></div>`;
+    c.innerHTML=`<div class="empty-wrap"><div class="empty-ico">${CAT_ICO[cat]||CAT_ICO['прочее']}</div><div class="empty-t">Товаров нет</div></div>`;
     return;
   }
-  const inCart = new Set(cart.map(i=>i.id));
-  c.innerHTML = `<div class="grid">${list.map((p,i)=>{
-    const ico = CAT_ICONS[p.category]||CAT_ICONS['прочее'];
-    const imgHtml = p.image_url
-      ? `<div class="card-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card-img-ph style=aspect-ratio:1>${ico.replace(/stroke=/g,'stroke=')}</div>'"></div>`
+  const inCart=new Set(cart.map(i=>i.id));
+  c.innerHTML=`<div class="grid">${list.map((p,i)=>{
+    const ico=CAT_ICO[p.category]||CAT_ICO['прочее'];
+    const ic=inCart.has(p.id);
+    const imgHtml=p.image_url
+      ? `<div class="card-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card-img-ph>${ico}</div>'"></div>`
       : `<div class="card-img-ph">${ico}</div>`;
-    const ic = inCart.has(p.id);
-    return `<div class="card${ic?' in-cart':''}" onclick="openProd(${p.id})" style="animation-delay:${i*.04}s">
-      ${ic?'<div class="badge-cart">В корзине</div>':''}
+    return `<div class="card${ic?' in-cart':''}" onclick="openProd(${p.id})" style="animation-delay:${i*.05}s">
+      <div class="card-strip"></div>
+      ${ic?'<div class="in-cart-badge">В корзине</div>':''}
       ${imgHtml}
       <div class="card-body">
         <div class="card-name">${p.name}</div>
@@ -373,35 +353,37 @@ function render(list) {
   }).join('')}</div>`;
 }
 
-function setcat(el, cat) {
-  curCat = cat;
-  document.querySelectorAll('.cat').forEach(b=>b.classList.remove('on'));
+function navClick(el, cat) {
+  curCat=cat;
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('on'));
   el.classList.add('on');
-  document.getElementById('secLabel').textContent = CAT_NAMES[cat]||cat;
-  render(cat==='all' ? products : products.filter(p=>p.category===cat));
+  render(cat);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function openProd(id) {
-  const p = products.find(x=>x.id===id);
+  const p=products.find(x=>x.id===id);
   if (!p) return;
   selProd=p; selVar=null; selQty=1;
-  const ico = CAT_ICONS[p.category]||CAT_ICONS['прочее'];
-  const vars = p.variants ? p.variants.split(',').map(v=>v.trim()).filter(Boolean) : [];
-  const imgHtml = p.image_url
-    ? `<img class="pmod-img" src="${p.image_url}" alt="${p.name}" onerror="this.outerHTML='<div class=pmod-img-ph>${ico}</div>'">`
+  const ico=CAT_ICO[p.category]||CAT_ICO['прочее'];
+  const vars=p.variants?p.variants.split(',').map(v=>v.trim()).filter(Boolean):[];
+  const inCart=cart.find(i=>i.id===id);
+  const imgHtml=p.image_url
+    ? `<div class="pmod-img-wrap"><img class="pmod-img" src="${p.image_url}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=pmod-img-ph>${ico}</div>'"><div class="pmod-img-gradient"></div></div>`
     : `<div class="pmod-img-ph">${ico}</div>`;
-  const inCart = cart.find(i=>i.id===id);
-  document.getElementById('prodContent').innerHTML = `
+  document.getElementById('prodContent').innerHTML=`
     ${imgHtml}
     <div class="pmod-body">
-      <div class="pmod-cat">${p.category}</div>
+      <div class="pmod-cat"><span class="pmod-cat-t">${p.category}</span></div>
       <div class="pmod-name">${p.name}</div>
-      <div class="pmod-price">${p.price_kzt.toLocaleString()} ₸</div>
-      <div class="pmod-rub">${p.price_rub.toLocaleString()} ₽</div>
-      ${p.description?`<div class="pmod-desc">${p.description}</div>`:''}
-      ${vars.length?`<div class="row-label">Вариант</div><div class="variants">${vars.map(v=>`<button class="var-btn" onclick="pickVar(this,'${v}')">${v}</button>`).join('')}</div>`:''}
+      <div class="pmod-prices">
+        <div class="pmod-kzt">${p.price_kzt.toLocaleString()} ₸</div>
+        <div class="pmod-rub">${p.price_rub.toLocaleString()} ₽</div>
+      </div>
+      ${p.description?`<div class="pmod-desc">${p.description}</div>`:'<div style="margin-bottom:20px"></div>'}
+      ${vars.length?`<div class="row-lbl">Выбери вариант</div><div class="variants">${vars.map(v=>`<button class="var-btn" onclick="pickVar(this,'${v}')">${v}</button>`).join('')}</div>`:''}
       <div class="qty-row">
-        <div class="row-label">Количество</div>
+        <div class="row-lbl">Количество</div>
         <div class="qty-ctrl">
           <button class="qb" onclick="chQty(-1)">−</button>
           <div class="qv" id="qtyVal">1</div>
@@ -417,105 +399,88 @@ function openProd(id) {
   document.body.style.overflow='hidden';
 }
 
-function pickVar(btn, v) {
-  document.querySelectorAll('.var-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on'); selVar=v;
-}
+function pickVar(btn,v){document.querySelectorAll('.var-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');selVar=v;}
+function chQty(d){selQty=Math.max(1,Math.min(99,selQty+d));document.getElementById('qtyVal').textContent=selQty;}
+function closeModOut(e){if(e.target===document.getElementById('prodOverlay'))closeMod();}
+function closeMod(){document.getElementById('prodOverlay').classList.remove('on');document.body.style.overflow='';}
 
-function chQty(d) {
-  selQty=Math.max(1,Math.min(99,selQty+d));
-  document.getElementById('qtyVal').textContent=selQty;
-}
-
-function closeModOut(e) { if(e.target===document.getElementById('prodOverlay')) closeMod(); }
-function closeMod() { document.getElementById('prodOverlay').classList.remove('on'); document.body.style.overflow=''; }
-
-function addCart() {
-  if (!selProd) return;
-  const ex = cart.find(i=>i.id===selProd.id && i.variant===selVar);
-  if (ex) ex.qty+=selQty;
+function addCart(){
+  if(!selProd)return;
+  const ex=cart.find(i=>i.id===selProd.id&&i.variant===selVar);
+  if(ex)ex.qty+=selQty;
   else cart.push({id:selProd.id,name:selProd.name,price_kzt:selProd.price_kzt,price_rub:selProd.price_rub,image_url:selProd.image_url,category:selProd.category,variant:selVar,qty:selQty});
-  updCartBtn();
+  updCart();
   const btn=document.getElementById('addBtn');
   btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Добавлено!`;
   btn.classList.add('done');
-  setTimeout(()=>{closeMod(); render(curCat==='all'?products:products.filter(p=>p.category===curCat));},500);
+  setTimeout(()=>{closeMod();render(curCat);},500);
 }
 
-function updCartBtn() {
+function updCart(){
   const t=cart.reduce((s,i)=>s+i.qty,0);
   const btn=document.getElementById('cartBtn');
-  const cnt=document.getElementById('cartCount');
-  if(t>0){btn.classList.add('active');cnt.textContent=t;}
-  else{btn.classList.remove('active');cnt.textContent=0;}
+  const badge=document.getElementById('cartBadge');
+  badge.textContent=t;
+  if(t>0)btn.classList.add('has');else btn.classList.remove('has');
 }
 
-function openCart() {
-  renderCart();
-  document.getElementById('cartOverlay').classList.add('on');
-  document.body.style.overflow='hidden';
-}
+function openCart(){renderCart();document.getElementById('cartOverlay').classList.add('on');document.body.style.overflow='hidden';}
+function closeCart(){document.getElementById('cartOverlay').classList.remove('on');document.body.style.overflow='';}
+function closeCartOut(e){if(e.target===document.getElementById('cartOverlay'))closeCart();}
 
-function closeCart() { document.getElementById('cartOverlay').classList.remove('on'); document.body.style.overflow=''; }
-function closeCartOut(e) { if(e.target===document.getElementById('cartOverlay')) closeCart(); }
-
-function renderCart() {
+function renderCart(){
   const c=document.getElementById('cartContent');
-  if (!cart.length) {
-    c.innerHTML=`<div class="cart-empty-wrap"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div class="cart-empty-t">Корзина пустая</div></div>`;
-    return;
-  }
+  if(!cart.length){c.innerHTML=`<div class="cart-empty-wrap"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div class="cart-empty-t">Корзина пустая</div></div>`;return;}
   const tkzt=cart.reduce((s,i)=>s+i.price_kzt*i.qty,0);
   const trub=cart.reduce((s,i)=>s+i.price_rub*i.qty,0);
-  const ico=CAT_ICONS;
-  c.innerHTML=`
-    <div class="cart-items">${cart.map((item,idx)=>{
-      const thumbHtml = item.image_url
-        ? `<img src="${item.image_url}" onerror="this.style.display='none'">`
-        : (ico[item.category]||ico['прочее']);
-      return `<div class="ci">
-        <div class="ci-thumb">${thumbHtml}</div>
-        <div class="ci-info">
-          <div class="ci-name">${item.name}</div>
-          ${item.variant?`<div class="ci-var">${item.variant}</div>`:''}
-          <div class="ci-price">${(item.price_kzt*item.qty).toLocaleString()} ₸</div>
-        </div>
-        <div class="ci-qty">
-          <button class="cqb" onclick="cq(${idx},-1)">−</button>
-          <div class="cqv">${item.qty}</div>
-          <button class="cqb" onclick="cq(${idx},1)">+</button>
-        </div>
-      </div>`;
-    }).join('')}</div>
-    <div class="cart-foot">
-      <div class="total-row">
-        <div class="total-label">Итого</div>
-        <div><div class="total-kzt">${tkzt.toLocaleString()} ₸</div><div class="total-rub">${trub.toLocaleString()} ₽</div></div>
+  c.innerHTML=`<div class="cart-items">${cart.map((item,idx)=>{
+    const ico=CAT_ICO[item.category]||CAT_ICO['прочее'];
+    const thumb=item.image_url?`<img src="${item.image_url}" onerror="this.style.display='none'">`:ico;
+    return `<div class="ci">
+      <div class="ci-thumb">${thumb}</div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        ${item.variant?`<div class="ci-var">${item.variant}</div>`:''}
+        <div class="ci-price">${(item.price_kzt*item.qty).toLocaleString()} ₸</div>
       </div>
-      <button class="buy-btn" onclick="checkout()">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        Оформить заказ
-      </button>
+      <div class="ci-qty">
+        <button class="cqb" onclick="cq(${idx},-1)">−</button>
+        <div class="cqv">${item.qty}</div>
+        <button class="cqb" onclick="cq(${idx},1)">+</button>
+      </div>
     </div>`;
+  }).join('')}</div>
+  <div class="cart-foot">
+    <div class="total-row">
+      <div class="total-lbl">Итого</div>
+      <div class="total-r">
+        <div class="total-kzt">${tkzt.toLocaleString()} ₸</div>
+        <div class="total-rub">${trub.toLocaleString()} ₽</div>
+      </div>
+    </div>
+    <button class="buy-btn" onclick="checkout()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Оформить заказ
+    </button>
+  </div>`;
 }
 
-function cq(idx, d) {
+function cq(idx,d){
   cart[idx].qty=Math.max(0,cart[idx].qty+d);
-  if(cart[idx].qty===0) cart.splice(idx,1);
-  updCartBtn(); renderCart();
-  render(curCat==='all'?products:products.filter(p=>p.category===curCat));
+  if(cart[idx].qty===0)cart.splice(idx,1);
+  updCart();renderCart();render(curCat);
 }
 
-function checkout() {
-  if (!cart.length) return;
+function checkout(){
+  if(!cart.length)return;
   const tkzt=cart.reduce((s,i)=>s+i.price_kzt*i.qty,0);
   const trub=cart.reduce((s,i)=>s+i.price_rub*i.qty,0);
   const data={items:cart.map(i=>({id:i.id,name:i.name,variant:i.variant,qty:i.qty,price_kzt:i.price_kzt,price_rub:i.price_rub})),total_kzt:tkzt,total_rub:trub};
-  if (window.Telegram && window.Telegram.WebApp) window.Telegram.WebApp.sendData(JSON.stringify(data));
+  if(window.Telegram&&window.Telegram.WebApp)window.Telegram.WebApp.sendData(JSON.stringify(data));
   else alert('Открой через Telegram бота!');
 }
 
-if (window.Telegram && window.Telegram.WebApp) { window.Telegram.WebApp.ready(); window.Telegram.WebApp.expand(); }
+if(window.Telegram&&window.Telegram.WebApp){window.Telegram.WebApp.ready();window.Telegram.WebApp.expand();}
 loadProducts();
 </script>
 </body>
