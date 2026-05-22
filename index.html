@@ -16,7 +16,6 @@
 html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;top:-120px;left:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(79,255,40,0.07) 0%,transparent 70%);pointer-events:none;z-index:0}
 body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;height:300px;background:radial-gradient(circle,rgba(184,255,0,0.06) 0%,transparent 70%);pointer-events:none;z-index:0}
-
 .hdr{position:sticky;top:0;z-index:100;background:rgba(12,12,12,0.93);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border);padding:10px 15px;display:flex;align-items:center;justify-content:space-between}
 .logo-wrap{display:flex;align-items:center}
 .cart-pill{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:8px 13px;cursor:pointer;transition:all .2s;font-size:12px;color:var(--text2);font-weight:500;position:relative}
@@ -26,9 +25,7 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 .cart-pill svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .cart-badge{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;border-radius:6px;padding:2px 6px;display:none}
 .cart-pill.has .cart-badge{display:block}
-
 .content{padding:14px 13px calc(var(--nav-h) + 22px);position:relative;z-index:1}
-
 .banner{background:linear-gradient(135deg,rgba(79,255,40,0.07),rgba(184,255,0,0.03));border:1px solid rgba(79,255,40,0.18);border-radius:16px;padding:12px 13px;display:flex;align-items:center;gap:11px;margin-bottom:18px;position:relative;overflow:hidden}
 .banner::before{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(79,255,40,0.12),transparent 70%);pointer-events:none}
 .ban-ico{width:38px;height:38px;background:rgba(79,255,40,0.1);border:1px solid rgba(79,255,40,0.2);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -36,11 +33,9 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 .ban-t{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;color:var(--text);margin-bottom:3px}
 .ban-s{font-size:11px;color:var(--text2);line-height:1.5}
 .ban-s b{background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700}
-
 .sec-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
 .sec-label{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;color:var(--text)}
 .sec-count{font-size:10px;color:var(--text3);font-family:'Unbounded',sans-serif}
-
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .18s,border-color .2s;position:relative;animation:up .35s ease both}
 .card:active{transform:scale(.95)}
@@ -61,7 +56,6 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 .card.in-cart .card-glow{opacity:1}
 .in-cart-badge{position:absolute;top:10px;right:9px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;font-family:'Unbounded',sans-serif;font-size:8px;font-weight:700;border-radius:6px;padding:3px 7px;letter-spacing:.3px;z-index:2}
 @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-
 .nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(12,12,12,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);height:var(--nav-h);display:flex;align-items:stretch;padding:0 2px;padding-bottom:env(safe-area-inset-bottom)}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:all .15s;border-radius:14px;margin:5px 2px;padding:0 2px;position:relative;-webkit-user-select:none;user-select:none}
 .nav-item:active{transform:scale(.88)}
@@ -74,14 +68,11 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 .nav-item.on .nav-lbl{color:var(--g1)}
 .nav-dot{width:3px;height:3px;background:var(--g1);border-radius:50%;position:absolute;top:5px;opacity:0;transition:opacity .15s;box-shadow:0 0 6px var(--g1)}
 .nav-item.on .nav-dot{opacity:1}
-
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s}
 .overlay.on{opacity:1;pointer-events:all}
 .sheet{background:var(--surface);border:1px solid var(--border2);border-top:1px solid rgba(79,255,40,0.15);border-radius:24px 24px 0 0;width:100%;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.25,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
 .overlay.on .sheet{transform:translateY(0)}
 .drag{width:36px;height:3px;background:var(--border2);border-radius:2px;margin:10px auto 0}
-
-/* ГАЛЕРЕЯ */
 .gallery{position:relative;width:100%;aspect-ratio:4/3;background:var(--card2);overflow:hidden;touch-action:pan-y}
 .gallery-track{display:flex;height:100%;transition:transform .3s cubic-bezier(.25,.72,0,1);will-change:transform}
 .gallery-slide{flex:0 0 100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -94,7 +85,6 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 .gallery-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.3);transition:all .2s}
 .gallery-dot.on{background:var(--g1);width:14px;border-radius:3px;box-shadow:0 0 6px var(--g1)}
 .gallery-count{position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.6);border-radius:8px;padding:3px 8px;font-size:10px;color:rgba(255,255,255,0.7);font-family:'Unbounded',sans-serif;z-index:3}
-
 .pmod-body{padding:14px 16px 28px}
 .pmod-cat-tag{display:inline-flex;align-items:center;background:rgba(79,255,40,0.08);border:1px solid rgba(79,255,40,0.2);border-radius:8px;padding:4px 10px;margin-bottom:10px}
 .pmod-cat-t{font-family:'Unbounded',sans-serif;font-size:8.5px;font-weight:700;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:1.5px;text-transform:uppercase}
@@ -116,7 +106,6 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 .add-btn svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .add-btn:active{transform:scale(.97);filter:brightness(.92)}
 .add-btn.done{background:linear-gradient(135deg,#2ecc12,#7ecf00);box-shadow:0 4px 20px rgba(46,204,18,0.2)}
-
 .cart-hdr{padding:16px 16px 13px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .cart-title{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700}
 .close-x{width:32px;height:32px;background:var(--card);border:1px solid var(--border2);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer}
@@ -156,10 +145,6 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 .empty-ico svg{width:30px;height:30px;stroke:var(--text3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:1.5px}
 </style>
-<script>
-// Данные товаров (генерируется ботом автоматически)
-const __PRODUCTS_PRELOADED__ = [{"id": 2, "name": "Кастет классический с обмоткой", "category": "кастеты", "price_kzt": 6666, "price_rub": 1111, "description": "Кастет классический, с обмоткой и подарочной сумочкой", "variants": "чёрный", "in_stock": 1, "preview_url": "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_1.jpg", "image_urls": ["https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_1.jpg"]}, {"id": 3, "name": "кастет 1", "category": "кастеты", "price_kzt": 12312, "price_rub": 12312, "description": "фыва333 ыфвфыв \n\nывыфвфы\nв", "variants": "красный, синий, чёрный", "in_stock": 1, "preview_url": "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_2.jpg", "image_urls": ["https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_2.jpg", "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_0.jpg", "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_3.jpg"]}, {"id": 4, "name": "asd", "category": "дубинки", "price_kzt": 1, "price_rub": 123123, "description": "asdasdsad", "variants": "красный, синий, чёрный", "in_stock": 1, "preview_url": "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_4.jpg", "image_urls": ["https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_4.jpg", "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_5.jpg"]}, {"id": 5, "name": "пидор", "category": "подики", "price_kzt": 666, "price_rub": 66454, "description": "пидорпас", "variants": "красный, синий, чёрный", "in_stock": 1, "preview_url": "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_6.jpg", "image_urls": ["https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_6.jpg", "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_7.jpg", "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_8.jpg"]}, {"id": 6, "name": "пидорас", "category": "кастеты", "price_kzt": 7000, "price_rub": 1000, "description": "пидорасы ауе", "variants": "ниггер", "in_stock": 1, "preview_url": "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_7.jpg", "image_urls": ["https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_7.jpg", "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_9.jpg", "https://api.telegram.org/file/bot8635095447:AAEqLXsbaYPcJBWytV6Wvg-Ywqi3u-0bZmM/photos/file_8.jpg"]}];
-</script>
 </head>
 <body>
 
@@ -221,12 +206,10 @@ const __PRODUCTS_PRELOADED__ = [{"id": 2, "name": "Кастет классиче
   </div>
 </nav>
 
-<!-- PRODUCT MODAL -->
 <div class="overlay" id="prodOverlay" onclick="closeModOut(event)">
   <div class="sheet"><div class="drag"></div><div id="prodContent"></div></div>
 </div>
 
-<!-- CART -->
 <div class="overlay" id="cartOverlay" onclick="closeCartOut(event)">
   <div class="sheet">
     <div class="drag"></div>
@@ -239,8 +222,6 @@ const __PRODUCTS_PRELOADED__ = [{"id": 2, "name": "Кастет классиче
 </div>
 
 <script>
-// API не нужен — данные вшиты ботом
-
 const CAT_SVG = {
   'кастеты':`<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="13" width="20" height="8" rx="2.5"/><path d="M5 13v-2.5a1.5 1.5 0 011.5-1.5h11a1.5 1.5 0 011.5 1.5V13"/><circle cx="7.5" cy="9" r="2"/><circle cx="12" cy="8" r="2.2"/><circle cx="16.5" cy="9" r="2"/></svg>`,
   'дубинки':`<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="2" width="4" height="10" rx="2"/><rect x="9" y="11" width="6" height="11" rx="1.5"/></svg>`,
@@ -304,7 +285,6 @@ function navClick(el,cat){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ===== ГАЛЕРЕЯ СВАЙП =====
 function buildGallery(imgs, ico){
   galImgs=imgs; galIdx=0;
   if(!imgs.length) return `<div class="gallery"><div class="gallery-track"><div class="gallery-slide"><div class="gallery-slide-ph">${ico}</div></div></div></div>`;
@@ -342,7 +322,6 @@ function gGoto(idx){
   if(cnt)cnt.textContent=`${idx+1} / ${galImgs.length}`;
 }
 
-// ===== ОТКРЫТЬ ТОВАР =====
 function openProd(id){
   const p=products.find(x=>x.id===id);
   if(!p)return;
@@ -458,9 +437,18 @@ function checkout(){
   if(!cart.length)return;
   const tkzt=cart.reduce((s,i)=>s+i.price_kzt*i.qty,0);
   const trub=cart.reduce((s,i)=>s+i.price_rub*i.qty,0);
-  const data={items:cart.map(i=>({id:i.id,name:i.name,variant:i.variant,qty:i.qty,price_kzt:i.price_kzt,price_rub:i.price_rub})),total_kzt:tkzt,total_rub:trub};
-  if(window.Telegram&&window.Telegram.WebApp)window.Telegram.WebApp.sendData(JSON.stringify(data));
-  else alert('Открой через Telegram бота!');
+  const data={
+    items:cart.map(i=>({id:i.id,name:i.name,variant:i.variant,qty:i.qty,price_kzt:i.price_kzt,price_rub:i.price_rub})),
+    total_kzt:tkzt,
+    total_rub:trub
+  };
+  const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  if(window.Telegram&&window.Telegram.WebApp){
+    window.Telegram.WebApp.openTelegramLink('https://t.me/hooliganssngshopbot?start=order_'+encoded);
+    window.Telegram.WebApp.close();
+  } else {
+    alert('Открой через Telegram бота!');
+  }
 }
 
 if(window.Telegram&&window.Telegram.WebApp){
