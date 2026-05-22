@@ -33,9 +33,7 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 .hdr{position:sticky;top:0;z-index:100;background:rgba(12,12,12,0.93);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border);padding:10px 15px 10px;display:flex;align-items:center;justify-content:space-between}
 
 /* LOGO */
-.logo-wrap{display:flex;align-items:center;gap:10px}
-.logo-svg{width:110px;height:36px;flex-shrink:0}
-.logo-sub{font-family:'Unbounded',sans-serif;font-size:6px;letter-spacing:4px;color:var(--text3);margin-top:2px}
+.logo-wrap{display:flex;align-items:center;gap:8px}
 
 /* CART PILL */
 .cart-pill{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:8px 13px;cursor:pointer;transition:all .2s;font-size:12px;color:var(--text2);font-weight:500;position:relative}
@@ -175,7 +173,8 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 .buy-btn svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .buy-btn:active{transform:scale(.97);filter:brightness(.92)}
 .cart-empty-wrap{padding:52px 16px;text-align:center}
-.cart-empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:2px;margin-top:14px}
+.cart-empty-wrap svg{display:block;margin:0 auto 14px}
+.cart-empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:2px}
 
 /* LOADER */
 .loader-wrap{display:flex;flex-direction:column;align-items:center;padding:70px 0;gap:14px}
@@ -194,65 +193,11 @@ body::after{content:'';position:fixed;bottom:100px;right:-100px;width:300px;heig
 
 <!-- HEADER -->
 <div class="hdr">
-  <!-- LOGO: Hooligans SNG с кастетом -->
   <div class="logo-wrap">
-    <svg class="logo-svg" viewBox="0 0 220 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="textGrad" x1="0" y1="0" x2="220" y2="0" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#4fff28"/>
-          <stop offset="50%" stop-color="#b8ff00"/>
-          <stop offset="100%" stop-color="#4fff28"/>
-        </linearGradient>
-        <linearGradient id="metalGrad" x1="0" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#d0d0d0"/>
-          <stop offset="30%" stop-color="#a0a0a0"/>
-          <stop offset="60%" stop-color="#707070"/>
-          <stop offset="100%" stop-color="#505050"/>
-        </linearGradient>
-        <linearGradient id="metalGrad2" x1="0" y1="0" x2="0" y2="16" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#e0e0e0"/>
-          <stop offset="50%" stop-color="#888"/>
-          <stop offset="100%" stop-color="#555"/>
-        </linearGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="1.5" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <!-- Кастет (металлический) -->
-      <!-- Основа кастета -->
-      <rect x="4" y="18" width="36" height="18" rx="4" fill="url(#metalGrad)" stroke="#333" stroke-width="0.5"/>
-      <!-- Блик на основе -->
-      <rect x="6" y="19" width="32" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
-      <!-- 4 кольца пальцев -->
-      <circle cx="12" cy="16" r="5" fill="url(#metalGrad2)" stroke="#333" stroke-width="0.5"/>
-      <circle cx="12" cy="16" r="2.5" fill="#111" stroke="#222" stroke-width="0.5"/>
-      <circle cx="12" cy="16" r="1" fill="rgba(255,255,255,0.15)"/>
-      
-      <circle cx="21" cy="14" r="5.5" fill="url(#metalGrad2)" stroke="#333" stroke-width="0.5"/>
-      <circle cx="21" cy="14" r="2.8" fill="#111" stroke="#222" stroke-width="0.5"/>
-      <circle cx="21" cy="14" r="1.1" fill="rgba(255,255,255,0.15)"/>
-      
-      <circle cx="30" cy="14" r="5.5" fill="url(#metalGrad2)" stroke="#333" stroke-width="0.5"/>
-      <circle cx="30" cy="14" r="2.8" fill="#111" stroke="#222" stroke-width="0.5"/>
-      <circle cx="30" cy="14" r="1.1" fill="rgba(255,255,255,0.15)"/>
-      
-      <circle cx="38" cy="16" r="5" fill="url(#metalGrad2)" stroke="#333" stroke-width="0.5"/>
-      <circle cx="38" cy="16" r="2.5" fill="#111" stroke="#222" stroke-width="0.5"/>
-      <circle cx="38" cy="16" r="1" fill="rgba(255,255,255,0.15)"/>
-      <!-- Шип снизу -->
-      <polygon points="12,36 16,44 8,44" fill="url(#metalGrad)" stroke="#333" stroke-width="0.5"/>
-      <!-- Блик на шипе -->
-      <polygon points="12,37 14,41 10,41" fill="rgba(255,255,255,0.2)"/>
-      <!-- Нижняя тень кастета -->
-      <rect x="4" y="32" width="36" height="4" rx="0" fill="rgba(0,0,0,0.4)"/>
-      <!-- ТЕКСТ HOOLIGANS -->
-      <text x="50" y="26" font-family="'Bebas Neue',sans-serif" font-size="22" fill="url(#textGrad)" filter="url(#glow)" letter-spacing="2">HOOLIGANS</text>
-      <!-- Зелёное свечение под текстом -->
-      <rect x="50" y="29" width="170" height="1.5" rx="1" fill="url(#textGrad)" opacity="0.4"/>
-      <!-- SNG маленький -->
-      <text x="51" y="40" font-family="'Unbounded',sans-serif" font-size="7" fill="#555" letter-spacing="5">SNG SHOP</text>
-    </svg>
+    <div style="display:flex;flex-direction:column;line-height:1;gap:0">
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:4px;background:linear-gradient(90deg,#4fff28,#b8ff00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">HOOLIGANS SNG</span>
+      <span style="font-family:'Unbounded',sans-serif;font-size:7px;letter-spacing:5px;color:#444;margin-top:2px;padding-left:2px">SHOP</span>
+    </div>
   </div>
   <div class="cart-pill" id="cartBtn" onclick="openCart()">
     <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -521,7 +466,7 @@ function closeCartOut(e){if(e.target===document.getElementById('cartOverlay'))cl
 function renderCart(){
   const c=document.getElementById('cartContent');
   if(!cart.length){
-    c.innerHTML=`<div class="cart-empty-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div class="cart-empty-t">Корзина пустая</div></div>`;
+    c.innerHTML=`<div class="cart-empty-wrap"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div class="cart-empty-t">Корзина пустая</div></div>`;
     return;
   }
   const tkzt=cart.reduce((s,i)=>s+i.price_kzt*i.qty,0);
@@ -577,8 +522,10 @@ if(window.Telegram&&window.Telegram.WebApp){
   const tg=window.Telegram.WebApp;
   tg.ready();
   tg.expand();
-  tg.disableVerticalSwipes();
+  if(tg.disableVerticalSwipes)tg.disableVerticalSwipes();
   if(tg.requestFullscreen)tg.requestFullscreen();
+  setTimeout(()=>tg.expand(),300);
+  setTimeout(()=>tg.expand(),800);
 }
 loadProducts();
 </script>
