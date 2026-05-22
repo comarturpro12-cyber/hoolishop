@@ -1,1149 +1,522 @@
-!DOCTYPE html
-html lang=ru
-head
-  meta charset=UTF-8
-  meta name=viewport content=width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no
-  titleHOOLIGANS SNG SHOPtitle
-  link href=httpsfonts.googleapis.comcss2family=Bebas+Neue&family=Unboundedwght@400;600;700;900&family=Interwght@400;500;600&display=swap rel=stylesheet
-  style
-    root {
-      --black #0a0a0a;
-      --dark #111111;
-      --card #161616;
-      --border #1f1f1f;
-      --green #39ff14;
-      --green-dim #27b80e;
-      --green-glow rgba(57, 255, 20, 0.15);
-      --green-glow2 rgba(57, 255, 20, 0.08);
-      --text #f0f0f0;
-      --text-muted #666;
-      --text-dim #999;
-      --red #ff3a3a;
-    }
-
-     { margin 0; padding 0; box-sizing border-box; -webkit-tap-highlight-color transparent; }
-
-    html, body {
-      background var(--black);
-      color var(--text);
-      font-family 'Inter', sans-serif;
-      min-height 100vh;
-      overflow-x hidden;
-    }
-
-     ШАПКА 
-    .header {
-      position sticky;
-      top 0;
-      z-index 100;
-      background rgba(10,10,10,0.95);
-      backdrop-filter blur(20px);
-      border-bottom 1px solid var(--border);
-      padding 14px 16px 10px;
-    }
-
-    .header-top {
-      display flex;
-      align-items center;
-      justify-content space-between;
-      margin-bottom 12px;
-    }
-
-    .logo {
-      font-family 'Bebas Neue', sans-serif;
-      font-size 22px;
-      letter-spacing 3px;
-      color var(--green);
-      text-shadow 0 0 20px var(--green);
-      line-height 1;
-    }
-
-    .logo span {
-      color var(--text);
-      opacity 0.5;
-    }
-
-    .cart-btn {
-      position relative;
-      background var(--card);
-      border 1px solid var(--border);
-      border-radius 12px;
-      padding 8px 14px;
-      color var(--text);
-      font-family 'Inter', sans-serif;
-      font-size 13px;
-      font-weight 600;
-      cursor pointer;
-      display flex;
-      align-items center;
-      gap 6px;
-      transition all 0.2s;
-    }
-
-    .cart-btnactive { transform scale(0.95); }
-    .cart-btn.has-items {
-      border-color var(--green);
-      color var(--green);
-      box-shadow 0 0 12px var(--green-glow);
-    }
-
-    .cart-count {
-      background var(--green);
-      color var(--black);
-      font-size 10px;
-      font-weight 700;
-      border-radius 50%;
-      width 18px;
-      height 18px;
-      display flex;
-      align-items center;
-      justify-content center;
-    }
-
-     КАТЕГОРИИ 
-    .categories {
-      display flex;
-      gap 8px;
-      overflow-x auto;
-      padding-bottom 2px;
-      scrollbar-width none;
-    }
-    .categories-webkit-scrollbar { display none; }
-
-    .cat-btn {
-      flex-shrink 0;
-      background transparent;
-      border 1px solid var(--border);
-      border-radius 20px;
-      padding 6px 14px;
-      color var(--text-dim);
-      font-family 'Inter', sans-serif;
-      font-size 12px;
-      font-weight 500;
-      cursor pointer;
-      transition all 0.2s;
-      white-space nowrap;
-      text-transform uppercase;
-      letter-spacing 0.5px;
-    }
-
-    .cat-btn.active {
-      background var(--green);
-      border-color var(--green);
-      color var(--black);
-      font-weight 700;
-      box-shadow 0 0 12px var(--green-glow);
-    }
-
-    .cat-btnactive { transform scale(0.93); }
-
-     КОНТЕНТ 
-    .content {
-      padding 16px;
-      padding-bottom 120px;
-    }
-
-    .section-title {
-      font-family 'Unbounded', sans-serif;
-      font-size 11px;
-      font-weight 600;
-      color var(--text-muted);
-      letter-spacing 2px;
-      text-transform uppercase;
-      margin-bottom 14px;
-    }
-
-     СЕТКА ТОВАРОВ 
-    .products-grid {
-      display grid;
-      grid-template-columns 1fr 1fr;
-      gap 10px;
-    }
-
-     КАРТОЧКА 
-    .product-card {
-      background var(--card);
-      border 1px solid var(--border);
-      border-radius 16px;
-      overflow hidden;
-      cursor pointer;
-      transition all 0.2s;
-      position relative;
-    }
-
-    .product-cardactive { transform scale(0.97); }
-    .product-card.in-cart {
-      border-color var(--green);
-      box-shadow 0 0 16px var(--green-glow2);
-    }
-
-    .product-img {
-      width 100%;
-      aspect-ratio 1;
-      object-fit cover;
-      background #1a1a1a;
-      display flex;
-      align-items center;
-      justify-content center;
-    }
-
-    .product-img img {
-      width 100%;
-      height 100%;
-      object-fit cover;
-    }
-
-    .product-img-placeholder {
-      width 100%;
-      aspect-ratio 1;
-      background linear-gradient(135deg, #1a1a1a, #222);
-      display flex;
-      align-items center;
-      justify-content center;
-      font-size 40px;
-    }
-
-    .product-info {
-      padding 10px;
-    }
-
-    .product-name {
-      font-family 'Unbounded', sans-serif;
-      font-size 11px;
-      font-weight 600;
-      color var(--text);
-      line-height 1.3;
-      margin-bottom 6px;
-    }
-
-    .product-price {
-      font-family 'Bebas Neue', sans-serif;
-      font-size 18px;
-      color var(--green);
-      letter-spacing 1px;
-      line-height 1;
-    }
-
-    .product-price-rub {
-      font-size 11px;
-      color var(--text-muted);
-      font-family 'Inter', sans-serif;
-      margin-top 2px;
-    }
-
-    .in-cart-badge {
-      position absolute;
-      top 8px;
-      right 8px;
-      background var(--green);
-      color var(--black);
-      font-size 10px;
-      font-weight 700;
-      border-radius 8px;
-      padding 2px 7px;
-      font-family 'Inter', sans-serif;
-    }
-
-     ЗАГРУЗКА 
-    .loader {
-      display flex;
-      flex-direction column;
-      align-items center;
-      justify-content center;
-      padding 60px 20px;
-      gap 16px;
-    }
-
-    .loader-ring {
-      width 40px;
-      height 40px;
-      border 2px solid var(--border);
-      border-top-color var(--green);
-      border-radius 50%;
-      animation spin 0.8s linear infinite;
-    }
-
-    @keyframes spin { to { transform rotate(360deg); } }
-
-    .loader-text {
-      font-family 'Unbounded', sans-serif;
-      font-size 10px;
-      color var(--text-muted);
-      letter-spacing 2px;
-    }
-
-     ПУСТО 
-    .empty {
-      text-align center;
-      padding 60px 20px;
-    }
-
-    .empty-icon { font-size 48px; margin-bottom 12px; }
-    .empty-text {
-      font-family 'Unbounded', sans-serif;
-      font-size 12px;
-      color var(--text-muted);
-      letter-spacing 1px;
-    }
-
-     МОДАЛКА ТОВАРА 
-    .modal-overlay {
-      position fixed;
-      inset 0;
-      background rgba(0,0,0,0.85);
-      z-index 200;
-      display flex;
-      align-items flex-end;
-      opacity 0;
-      pointer-events none;
-      transition opacity 0.25s;
-    }
-
-    .modal-overlay.open {
-      opacity 1;
-      pointer-events all;
-    }
-
-    .modal {
-      background var(--dark);
-      border 1px solid var(--border);
-      border-radius 24px 24px 0 0;
-      width 100%;
-      max-height 90vh;
-      overflow-y auto;
-      transform translateY(100%);
-      transition transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-      padding-bottom env(safe-area-inset-bottom);
-    }
-
-    .modal-overlay.open .modal {
-      transform translateY(0);
-    }
-
-    .modal-handle {
-      width 36px;
-      height 4px;
-      background var(--border);
-      border-radius 2px;
-      margin 12px auto 0;
-    }
-
-    .modal-img {
-      width 100%;
-      aspect-ratio 169;
-      object-fit cover;
-      background #1a1a1a;
-    }
-
-    .modal-img-placeholder {
-      width 100%;
-      aspect-ratio 169;
-      background linear-gradient(135deg, #1a1a1a, #222);
-      display flex;
-      align-items center;
-      justify-content center;
-      font-size 64px;
-    }
-
-    .modal-body {
-      padding 20px 16px 24px;
-    }
-
-    .modal-category {
-      font-size 10px;
-      font-weight 600;
-      color var(--green);
-      text-transform uppercase;
-      letter-spacing 2px;
-      margin-bottom 8px;
-    }
-
-    .modal-name {
-      font-family 'Unbounded', sans-serif;
-      font-size 18px;
-      font-weight 700;
-      color var(--text);
-      line-height 1.3;
-      margin-bottom 12px;
-    }
-
-    .modal-price {
-      font-family 'Bebas Neue', sans-serif;
-      font-size 32px;
-      color var(--green);
-      letter-spacing 2px;
-      line-height 1;
-    }
-
-    .modal-price-rub {
-      font-size 14px;
-      color var(--text-muted);
-      font-family 'Inter', sans-serif;
-      margin-top 4px;
-      margin-bottom 16px;
-    }
-
-    .modal-desc {
-      font-size 13px;
-      color var(--text-dim);
-      line-height 1.6;
-      margin-bottom 20px;
-    }
-
-     ВАРИАНТЫ 
-    .variants-title {
-      font-size 11px;
-      font-weight 600;
-      color var(--text-muted);
-      text-transform uppercase;
-      letter-spacing 1px;
-      margin-bottom 10px;
-    }
-
-    .variants-list {
-      display flex;
-      flex-wrap wrap;
-      gap 8px;
-      margin-bottom 20px;
-    }
-
-    .variant-btn {
-      background var(--card);
-      border 1px solid var(--border);
-      border-radius 10px;
-      padding 7px 14px;
-      color var(--text-dim);
-      font-size 12px;
-      font-weight 500;
-      cursor pointer;
-      transition all 0.15s;
-    }
-
-    .variant-btn.selected {
-      border-color var(--green);
-      color var(--green);
-      background var(--green-glow2);
-    }
-
-     КОЛИЧЕСТВО 
-    .qty-row {
-      display flex;
-      align-items center;
-      gap 16px;
-      margin-bottom 20px;
-    }
-
-    .qty-label {
-      font-size 11px;
-      font-weight 600;
-      color var(--text-muted);
-      text-transform uppercase;
-      letter-spacing 1px;
-    }
-
-    .qty-controls {
-      display flex;
-      align-items center;
-      gap 0;
-      background var(--card);
-      border 1px solid var(--border);
-      border-radius 12px;
-      overflow hidden;
-    }
-
-    .qty-btn {
-      width 40px;
-      height 40px;
-      background transparent;
-      border none;
-      color var(--text);
-      font-size 18px;
-      cursor pointer;
-      display flex;
-      align-items center;
-      justify-content center;
-      transition background 0.15s;
-    }
-
-    .qty-btnactive { background var(--border); }
-
-    .qty-val {
-      width 36px;
-      text-align center;
-      font-family 'Unbounded', sans-serif;
-      font-size 14px;
-      font-weight 600;
-      color var(--text);
-    }
-
-     КНОПКА ДОБАВИТЬ 
-    .add-btn {
-      width 100%;
-      background var(--green);
-      color var(--black);
-      border none;
-      border-radius 14px;
-      padding 16px;
-      font-family 'Unbounded', sans-serif;
-      font-size 13px;
-      font-weight 700;
-      letter-spacing 1px;
-      cursor pointer;
-      transition all 0.15s;
-      text-transform uppercase;
-    }
-
-    .add-btnactive { transform scale(0.97); filter brightness(0.9); }
-    .add-btn.added {
-      background var(--green-dim);
-    }
-
-     КОРЗИНА 
-    .cart-overlay {
-      position fixed;
-      inset 0;
-      background rgba(0,0,0,0.85);
-      z-index 300;
-      display flex;
-      align-items flex-end;
-      opacity 0;
-      pointer-events none;
-      transition opacity 0.25s;
-    }
-
-    .cart-overlay.open {
-      opacity 1;
-      pointer-events all;
-    }
-
-    .cart-sheet {
-      background var(--dark);
-      border 1px solid var(--border);
-      border-radius 24px 24px 0 0;
-      width 100%;
-      max-height 85vh;
-      overflow-y auto;
-      transform translateY(100%);
-      transition transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-      padding-bottom env(safe-area-inset-bottom);
-    }
-
-    .cart-overlay.open .cart-sheet {
-      transform translateY(0);
-    }
-
-    .cart-header {
-      padding 20px 16px 16px;
-      border-bottom 1px solid var(--border);
-      display flex;
-      align-items center;
-      justify-content space-between;
-    }
-
-    .cart-title {
-      font-family 'Unbounded', sans-serif;
-      font-size 14px;
-      font-weight 700;
-    }
-
-    .cart-close {
-      width 32px;
-      height 32px;
-      background var(--card);
-      border 1px solid var(--border);
-      border-radius 8px;
-      display flex;
-      align-items center;
-      justify-content center;
-      cursor pointer;
-      color var(--text-dim);
-      font-size 16px;
-    }
-
-    .cart-items {
-      padding 12px 16px;
-    }
-
-    .cart-item {
-      display flex;
-      align-items center;
-      gap 12px;
-      padding 12px 0;
-      border-bottom 1px solid var(--border);
-    }
-
-    .cart-itemlast-child { border-bottom none; }
-
-    .cart-item-emoji {
-      width 48px;
-      height 48px;
-      background var(--card);
-      border-radius 10px;
-      display flex;
-      align-items center;
-      justify-content center;
-      font-size 22px;
-      flex-shrink 0;
-      overflow hidden;
-    }
-
-    .cart-item-emoji img {
-      width 100%;
-      height 100%;
-      object-fit cover;
-    }
-
-    .cart-item-info { flex 1; min-width 0; }
-
-    .cart-item-name {
-      font-family 'Unbounded', sans-serif;
-      font-size 10px;
-      font-weight 600;
-      color var(--text);
-      margin-bottom 3px;
-      white-space nowrap;
-      overflow hidden;
-      text-overflow ellipsis;
-    }
-
-    .cart-item-variant {
-      font-size 11px;
-      color var(--text-muted);
-      margin-bottom 4px;
-    }
-
-    .cart-item-price {
-      font-family 'Bebas Neue', sans-serif;
-      font-size 16px;
-      color var(--green);
-      letter-spacing 1px;
-    }
-
-    .cart-item-qty {
-      display flex;
-      align-items center;
-      gap 0;
-      background var(--card);
-      border 1px solid var(--border);
-      border-radius 10px;
-      overflow hidden;
-    }
-
-    .cqb {
-      width 32px;
-      height 32px;
-      background transparent;
-      border none;
-      color var(--text);
-      font-size 16px;
-      cursor pointer;
-      display flex;
-      align-items center;
-      justify-content center;
-    }
-
-    .cqbactive { background var(--border); }
-
-    .cqv {
-      width 28px;
-      text-align center;
-      font-family 'Unbounded', sans-serif;
-      font-size 12px;
-      font-weight 600;
-    }
-
-    .cart-footer {
-      padding 16px;
-      border-top 1px solid var(--border);
-      background var(--dark);
-      position sticky;
-      bottom 0;
-    }
-
-    .cart-total {
-      display flex;
-      justify-content space-between;
-      align-items center;
-      margin-bottom 14px;
-    }
-
-    .cart-total-label {
-      font-size 12px;
-      color var(--text-muted);
-      font-weight 500;
-    }
-
-    .cart-total-price {
-      font-family 'Bebas Neue', sans-serif;
-      font-size 24px;
-      color var(--green);
-      letter-spacing 2px;
-    }
-
-    .cart-total-rub {
-      font-size 12px;
-      color var(--text-muted);
-      text-align right;
-    }
-
-    .buy-btn {
-      width 100%;
-      background var(--green);
-      color var(--black);
-      border none;
-      border-radius 14px;
-      padding 16px;
-      font-family 'Unbounded', sans-serif;
-      font-size 13px;
-      font-weight 700;
-      letter-spacing 1px;
-      cursor pointer;
-      transition all 0.15s;
-      text-transform uppercase;
-    }
-
-    .buy-btnactive { transform scale(0.97); filter brightness(0.9); }
-
-    .cart-empty {
-      padding 48px 16px;
-      text-align center;
-    }
-
-    .cart-empty-icon { font-size 48px; margin-bottom 12px; }
-    .cart-empty-text {
-      font-family 'Unbounded', sans-serif;
-      font-size 11px;
-      color var(--text-muted);
-      letter-spacing 1px;
-    }
-
-     БАННЕР СВЕРХУ 
-    .banner {
-      margin 0 16px 16px;
-      background linear-gradient(135deg, #0f1f0a, #1a2e10);
-      border 1px solid rgba(57,255,20,0.2);
-      border-radius 16px;
-      padding 14px 16px;
-      display flex;
-      align-items center;
-      gap 12px;
-    }
-
-    .banner-icon { font-size 24px; }
-
-    .banner-text {
-      font-size 12px;
-      color var(--text-dim);
-      line-height 1.5;
-    }
-
-    .banner-text b {
-      color var(--green);
-      font-weight 600;
-    }
-
-     АНИМАЦИИ 
-    @keyframes fadeIn {
-      from { opacity 0; transform translateY(10px); }
-      to { opacity 1; transform translateY(0); }
-    }
-
-    .product-card {
-      animation fadeIn 0.3s ease forwards;
-    }
-  style
-head
-body
-
-!-- ШАПКА --
-div class=header
-  div class=header-top
-    div class=logoHOOLIGANS spanSNGspandiv
-    button class=cart-btn id=cartBtn onclick=openCart()
-      🛒 Корзина
-      span class=cart-count id=cartCount style=displaynone0span
-    button
-  div
-  div class=categories id=categories
-    button class=cat-btn active onclick=filterCategory('all')Всеbutton
-    button class=cat-btn onclick=filterCategory('кастеты')Кастетыbutton
-    button class=cat-btn onclick=filterCategory('дубинки')Дубинкиbutton
-    button class=cat-btn onclick=filterCategory('подики')Подикиbutton
-    button class=cat-btn onclick=filterCategory('одноразки')Одноразкиbutton
-    button class=cat-btn onclick=filterCategory('жижи')Жижиbutton
-    button class=cat-btn onclick=filterCategory('прочее')Прочееbutton
-  div
-div
-
-!-- КОНТЕНТ --
-div class=content
-  div class=banner
-    div class=banner-icon💬div
-    div class=banner-textНет нужного товара bНапиши Асхеb — закажем под тебя!div
-  div
-
-  div class=section-title id=sectionTitleВсе товарыdiv
-
-  div id=productsContainer
-    div class=loader
-      div class=loader-ringdiv
-      div class=loader-textЗагрузка...div
-    div
-  div
-div
-
-!-- МОДАЛКА ТОВАРА --
-div class=modal-overlay id=modalOverlay onclick=closeModalOutside(event)
-  div class=modal id=modal
-    div class=modal-handlediv
-    div id=modalContentdiv
-  div
-div
-
-!-- КОРЗИНА --
-div class=cart-overlay id=cartOverlay onclick=closeCartOutside(event)
-  div class=cart-sheet id=cartSheet
-    div class=cart-header
-      div class=cart-title🛒 Корзинаdiv
-      div class=cart-close onclick=closeCart()✕div
-    div
-    div id=cartContentdiv
-  div
-div
-
-script
-   ===== КОНФИГ =====
-  const API_URL = http127.0.0.15000;  Замените на адрес PythonAnywhere после деплоя
-
-  const CATEGORY_EMOJI = {
-    'кастеты' '👊',
-    'дубинки' '🪄',
-    'подики' '💨',
-    'одноразки' '🔋',
-    'жижи' '💧',
-    'прочее' '📦',
-  };
-
-   ===== СОСТОЯНИЕ =====
-  let allProducts = [];
-  let currentCategory = 'all';
-  let cart = [];
-  let selectedProduct = null;
-  let selectedVariant = null;
-  let selectedQty = 1;
-
-   ===== ЗАГРУЗКА ТОВАРОВ =====
-  async function loadProducts() {
-    try {
-      const res = await fetch(`${API_URL}products`);
-      const data = await res.json();
-      if (data.ok) {
-        allProducts = data.products;
-        renderProducts(allProducts);
-      } else {
-        showError();
-      }
-    } catch (e) {
-      showError();
-    }
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HOOLIGANS SNG</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Unbounded:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808;
+  --surface: #101010;
+  --card: #141414;
+  --card2: #181818;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.1);
+  --green: #3dff1a;
+  --green2: #2ecc12;
+  --green-a10: rgba(61,255,26,0.1);
+  --green-a05: rgba(61,255,26,0.05);
+  --text: #f2f2f2;
+  --text2: #888;
+  --text3: #555;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* SCAN LINE texture overlay */
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9999}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 10px}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-icon{width:32px;height:32px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-main{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--green)}
+.logo-sub{font-family:'Unbounded',sans-serif;font-size:7px;letter-spacing:4px;color:var(--text3);text-transform:uppercase;margin-top:1px}
+
+.cart-btn{position:relative;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:8px 14px;color:var(--text2);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+.cart-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cart-btn.active{border-color:var(--green);color:var(--green)}
+.cart-count{background:var(--green);color:#000;font-size:10px;font-weight:700;border-radius:6px;padding:1px 6px;font-family:'Unbounded',sans-serif;display:none}
+.cart-btn.active .cart-count{display:block}
+
+/* CATEGORIES */
+.cats{display:flex;gap:6px;overflow-x:auto;padding:0 16px 12px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex-shrink:0;display:flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--border);border-radius:20px;padding:6px 12px;color:var(--text3);font-family:'Inter',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap}
+.cat svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.cat.on{background:var(--green);border-color:var(--green);color:#000;font-weight:600}
+.cat.on svg{stroke:#000}
+.cat:active{transform:scale(.93)}
+
+/* CONTENT */
+.content{padding:16px;padding-bottom:140px}
+.sec-label{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+
+/* BANNER */
+.banner{background:linear-gradient(135deg,rgba(61,255,26,0.06),rgba(61,255,26,0.02));border:1px solid rgba(61,255,26,0.15);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.banner-ico{width:36px;height:36px;background:rgba(61,255,26,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.banner-ico svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.banner-t{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:600;color:var(--text);margin-bottom:3px}
+.banner-s{font-size:11px;color:var(--text2);line-height:1.5}
+.banner-s span{color:var(--green);font-weight:500}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s;position:relative;animation:fadeUp .4s ease both}
+.card:active{transform:scale(.96)}
+.card.in-cart{border-color:rgba(61,255,26,0.4)}
+.card-img{width:100%;aspect-ratio:1;background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.card:active .card-img img{transform:scale(1.05)}
+.card-img-ph{width:100%;aspect-ratio:1;background:var(--card2);display:flex;align-items:center;justify-content:center}
+.card-img-ph svg{width:52px;height:52px;stroke:var(--text3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.card-body{padding:10px}
+.card-name{font-family:'Unbounded',sans-serif;font-size:10px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:6px}
+.card-price{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--green);letter-spacing:1px;line-height:1}
+.card-rub{font-size:10px;color:var(--text3);margin-top:2px}
+.badge-cart{position:absolute;top:8px;right:8px;background:var(--green);color:#000;font-size:9px;font-weight:700;border-radius:6px;padding:3px 7px;font-family:'Unbounded',sans-serif;letter-spacing:.5px}
+
+/* LOADER */
+.loader-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:14px}
+.loader-ring{width:36px;height:36px;border:1.5px solid var(--border2);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite}
+.loader-txt{font-family:'Unbounded',sans-serif;font-size:9px;color:var(--text3);letter-spacing:3px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* EMPTY */
+.empty-wrap{text-align:center;padding:60px 16px}
+.empty-ico{margin:0 auto 14px;width:56px;height:56px;background:var(--card);border-radius:16px;display:flex;align-items:center;justify-content:center}
+.empty-ico svg{width:28px;height:28px;stroke:var(--text3);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.empty-t{font-family:'Unbounded',sans-serif;font-size:11px;color:var(--text3);letter-spacing:1px}
+
+/* OVERLAY BASE */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:200;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .25s}
+.overlay.on{opacity:1;pointer-events:all}
+.sheet{background:var(--surface);border:1px solid var(--border);border-radius:22px 22px 0 0;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1)}
+.overlay.on .sheet{transform:translateY(0)}
+.drag-handle{width:32px;height:3px;background:var(--border2);border-radius:2px;margin:10px auto 0}
+
+/* PRODUCT MODAL */
+.pmod-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--card)}
+.pmod-img-ph{width:100%;aspect-ratio:4/3;background:var(--card);display:flex;align-items:center;justify-content:center}
+.pmod-img-ph svg{width:80px;height:80px;stroke:var(--text3);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.pmod-body{padding:18px 16px 24px}
+.pmod-cat{font-size:10px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.pmod-name{font-family:'Unbounded',sans-serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:10px}
+.pmod-price{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--green);letter-spacing:2px;line-height:1}
+.pmod-rub{font-size:13px;color:var(--text2);margin-top:3px;margin-bottom:16px}
+.pmod-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:20px}
+.row-label{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px}
+.variants{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.var-btn{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:7px 14px;color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+.var-btn.on{border-color:var(--green);color:var(--green);background:var(--green-a05)}
+.qty-row{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.qty-ctrl{display:flex;align-items:center;background:var(--card);border:1px solid var(--border2);border-radius:12px;overflow:hidden}
+.qb{width:40px;height:40px;background:transparent;border:none;color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.qb:active{background:var(--border2)}
+.qv{width:36px;text-align:center;font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;color:var(--text)}
+.add-btn{width:100%;background:var(--green);color:#000;border:none;border-radius:13px;padding:16px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px}
+.add-btn svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.add-btn:active{transform:scale(.97);filter:brightness(.9)}
+.add-btn.done{background:var(--green2)}
+
+/* CART */
+.cart-hdr{padding:18px 16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cart-title{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700}
+.close-btn{width:30px;height:30px;background:var(--card);border:1px solid var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2)}
+.close-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.cart-items{padding:8px 16px}
+.ci{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border)}
+.ci:last-child{border-bottom:none}
+.ci-thumb{width:46px;height:46px;background:var(--card);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.ci-thumb img{width:100%;height:100%;object-fit:cover}
+.ci-thumb svg{width:22px;height:22px;stroke:var(--text3);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.ci-var{font-size:10px;color:var(--text3);margin-bottom:3px}
+.ci-price{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--green);letter-spacing:1px}
+.ci-qty{display:flex;align-items:center;background:var(--card);border:1px solid var(--border2);border-radius:10px;overflow:hidden}
+.cqb{width:30px;height:30px;background:transparent;border:none;color:var(--text);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cqb:active{background:var(--border2)}
+.cqv{width:24px;text-align:center;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:600}
+.cart-foot{padding:14px 16px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--surface)}
+.total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.total-label{font-size:12px;color:var(--text2)}
+.total-kzt{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--green);letter-spacing:2px}
+.total-rub{font-size:11px;color:var(--text3);text-align:right}
+.buy-btn{width:100%;background:var(--green);color:#000;border:none;border-radius:13px;padding:15px;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .15s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px}
+.buy-btn svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.buy-btn:active{transform:scale(.97);filter:brightness(.9)}
+.cart-empty-wrap{padding:48px 16px;text-align:center}
+.cart-empty-wrap svg{width:44px;height:44px;stroke:var(--text3);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 12px;display:block}
+.cart-empty-t{font-family:'Unbounded',sans-serif;font-size:10px;color:var(--text3);letter-spacing:2px}
+</style>
+</head>
+<body>
+
+<!-- SVG DEFS (кастомные иконки) -->
+<svg style="display:none">
+  <symbol id="ico-logo" viewBox="0 0 32 32">
+    <polygon points="16,2 20,10 29,11 22,18 24,27 16,23 8,27 10,18 3,11 12,10" stroke-width="1.5" stroke-linejoin="round"/>
+    <circle cx="16" cy="16" r="4" stroke-width="1.5"/>
+  </symbol>
+  <symbol id="ico-cart" viewBox="0 0 24 24">
+    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <path d="M16 10a4 4 0 01-8 0"/>
+  </symbol>
+  <symbol id="ico-msg" viewBox="0 0 24 24">
+    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+  </symbol>
+  <symbol id="ico-knuckle" viewBox="0 0 24 24">
+    <rect x="2" y="10" width="20" height="10" rx="2"/>
+    <path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/>
+    <line x1="8" y1="10" x2="8" y2="20"/>
+    <line x1="12" y1="10" x2="12" y2="20"/>
+    <line x1="16" y1="10" x2="16" y2="20"/>
+    <circle cx="4" cy="8" r="1.5"/>
+  </symbol>
+  <symbol id="ico-baton" viewBox="0 0 24 24">
+    <line x1="5" y1="19" x2="19" y2="5" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="6" cy="18" r="3"/>
+  </symbol>
+  <symbol id="ico-pod" viewBox="0 0 24 24">
+    <rect x="7" y="2" width="10" height="18" rx="3"/>
+    <rect x="9" y="5" width="6" height="3" rx="1"/>
+    <circle cx="12" cy="17" r="1"/>
+    <path d="M7 9h10"/>
+  </symbol>
+  <symbol id="ico-disposable" viewBox="0 0 24 24">
+    <rect x="8" y="2" width="8" height="20" rx="2"/>
+    <rect x="10" y="4" width="4" height="6" rx="1"/>
+    <line x1="10" y1="14" x2="14" y2="14"/>
+    <line x1="10" y1="17" x2="14" y2="17"/>
+    <path d="M8 2h8" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="ico-liquid" viewBox="0 0 24 24">
+    <path d="M12 2C12 2 4 10 4 14a8 8 0 0016 0c0-4-8-12-8-12z"/>
+    <path d="M9 17c0 1.66 1.34 3 3 3"/>
+  </symbol>
+  <symbol id="ico-box" viewBox="0 0 24 24">
+    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+    <line x1="12" y1="22.08" x2="12" y2="12"/>
+  </symbol>
+  <symbol id="ico-check" viewBox="0 0 24 24">
+    <polyline points="20 6 9 17 4 12"/>
+  </symbol>
+  <symbol id="ico-plus" viewBox="0 0 24 24">
+    <line x1="12" y1="5" x2="12" y2="19"/>
+    <line x1="5" y1="12" x2="19" y2="12"/>
+  </symbol>
+  <symbol id="ico-x" viewBox="0 0 24 24">
+    <line x1="18" y1="6" x2="6" y2="18"/>
+    <line x1="6" y1="6" x2="18" y2="18"/>
+  </symbol>
+  <symbol id="ico-spark" viewBox="0 0 24 24">
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+  </symbol>
+  <symbol id="ico-all" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="7" height="7" rx="1"/>
+    <rect x="14" y="3" width="7" height="7" rx="1"/>
+    <rect x="3" y="14" width="7" height="7" rx="1"/>
+    <rect x="14" y="14" width="7" height="7" rx="1"/>
+  </symbol>
+</svg>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="logo-wrap">
+      <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="#3dff1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="16,2 20,10 29,11 22,18 24,27 16,23 8,27 10,18 3,11 12,10"/>
+        <circle cx="16" cy="16" r="3.5"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-main">HOOLIGANS</span>
+        <span class="logo-sub">SNG SHOP</span>
+      </div>
+    </div>
+    <button class="cart-btn" id="cartBtn" onclick="openCart()">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span id="cartCount" class="cart-count">0</span>
+    </button>
+  </div>
+  <div class="cats" id="cats">
+    <button class="cat on" data-cat="all" onclick="setcat(this,'all')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Все
+    </button>
+    <button class="cat" data-cat="кастеты" onclick="setcat(this,'кастеты')">
+      <svg viewBox="0 0 24 24"><rect x="2" y="10" width="20" height="10" rx="2"/><path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/><line x1="8" y1="10" x2="8" y2="20"/><line x1="12" y1="10" x2="12" y2="20"/><line x1="16" y1="10" x2="16" y2="20"/></svg>
+      Кастеты
+    </button>
+    <button class="cat" data-cat="дубинки" onclick="setcat(this,'дубинки')">
+      <svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5" stroke-width="3" stroke-linecap="round"/><circle cx="6" cy="18" r="3"/></svg>
+      Дубинки
+    </button>
+    <button class="cat" data-cat="подики" onclick="setcat(this,'подики')">
+      <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="3" rx="1"/><circle cx="12" cy="17" r="1"/><path d="M7 9h10"/></svg>
+      Подики
+    </button>
+    <button class="cat" data-cat="одноразки" onclick="setcat(this,'одноразки')">
+      <svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="20" rx="2"/><rect x="10" y="4" width="4" height="6" rx="1"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="10" y1="17" x2="14" y2="17"/></svg>
+      Одноразки
+    </button>
+    <button class="cat" data-cat="жижи" onclick="setcat(this,'жижи')">
+      <svg viewBox="0 0 24 24"><path d="M12 2C12 2 4 10 4 14a8 8 0 0016 0c0-4-8-12-8-12z"/><path d="M9 17c0 1.66 1.34 3 3 3"/></svg>
+      Жижи
+    </button>
+    <button class="cat" data-cat="прочее" onclick="setcat(this,'прочее')">
+      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      Прочее
+    </button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+  <div class="banner">
+    <div class="banner-ico">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    </div>
+    <div>
+      <div class="banner-t">Нет нужного товара?</div>
+      <div class="banner-s">Напиши <span>Асхе</span> — закажем под тебя</div>
+    </div>
+  </div>
+  <div class="sec-label" id="secLabel">Все товары</div>
+  <div id="container">
+    <div class="loader-wrap">
+      <div class="loader-ring"></div>
+      <div class="loader-txt">Загрузка</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="overlay" id="prodOverlay" onclick="closeModOut(event)">
+  <div class="sheet" id="prodSheet">
+    <div class="drag-handle"></div>
+    <div id="prodContent"></div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="overlay" id="cartOverlay" onclick="closeCartOut(event)">
+  <div class="sheet" id="cartSheet">
+    <div class="drag-handle"></div>
+    <div class="cart-hdr">
+      <div class="cart-title">Корзина</div>
+      <div class="close-btn" onclick="closeCart()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+    </div>
+    <div id="cartContent"></div>
+  </div>
+</div>
+
+<script>
+const API = "http://127.0.0.1:5000";
+
+const CAT_ICONS = {
+  'кастеты': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10" width="20" height="10" rx="2"/><path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/><line x1="8" y1="10" x2="8" y2="20"/><line x1="12" y1="10" x2="12" y2="20"/><line x1="16" y1="10" x2="16" y2="20"/></svg>`,
+  'дубинки': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5" stroke-width="3"/><circle cx="6" cy="18" r="3"/></svg>`,
+  'подики': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="3" rx="1"/><circle cx="12" cy="17" r="1"/><path d="M7 9h10"/></svg>`,
+  'одноразки': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="20" rx="2"/><rect x="10" y="4" width="4" height="6" rx="1"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="10" y1="17" x2="14" y2="17"/></svg>`,
+  'жижи': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C12 2 4 10 4 14a8 8 0 0016 0c0-4-8-12-8-12z"/><path d="M9 17c0 1.66 1.34 3 3 3"/></svg>`,
+  'прочее': `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+};
+
+const CAT_NAMES = {'all':'Все товары','кастеты':'Кастеты','дубинки':'Дубинки','подики':'Подики','одноразки':'Одноразки','жижи':'Жижи','прочее':'Прочее'};
+
+let products = [], curCat = 'all', cart = [], selProd = null, selVar = null, selQty = 1;
+
+async function loadProducts() {
+  try {
+    const r = await fetch(`${API}/products`);
+    const d = await r.json();
+    if (d.ok) { products = d.products; render(products); }
+    else showErr();
+  } catch(e) { showErr(); }
+}
+
+function showErr() {
+  document.getElementById('container').innerHTML = `<div class="empty-wrap"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="empty-t">Ошибка загрузки</div></div>`;
+}
+
+function render(list) {
+  const c = document.getElementById('container');
+  if (!list.length) {
+    c.innerHTML = `<div class="empty-wrap"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div class="empty-t">Товаров нет</div></div>`;
+    return;
   }
-
-  function showError() {
-    document.getElementById('productsContainer').innerHTML = `
-      div class=empty
-        div class=empty-icon⚠️div
-        div class=empty-textНе удалось загрузить товарыdiv
-      div
-    `;
-  }
-
-   ===== РЕНДЕР ТОВАРОВ =====
-  function renderProducts(products) {
-    const container = document.getElementById('productsContainer');
-
-    if (!products.length) {
-      container.innerHTML = `
-        div class=empty
-          div class=empty-icon📭div
-          div class=empty-textТоваров нетdiv
-        div
-      `;
-      return;
-    }
-
-    const inCartIds = new Set(cart.map(i = i.id));
-
-    container.innerHTML = `div class=products-grid
-      ${products.map((p, idx) = {
-        const emoji = CATEGORY_EMOJI[p.category]  '📦';
-        const inCart = inCartIds.has(p.id);
-        const imgHtml = p.image_url
-           `div class=product-imgimg src=${p.image_url} alt=${p.name} loading=lazy onerror=this.parentElement.innerHTML='div style='width100%;aspect-ratio1;displayflex;align-itemscenter;justify-contentcenter;font-size40px;backgroundlinear-gradient(135deg,#1a1a1a,#222)'${emoji}div'div`
-           `div class=product-img-placeholder${emoji}div`;
-
-        return `
-          div class=product-card ${inCart  'in-cart'  ''} onclick=openProduct(${p.id}) style=animation-delay${idx  0.05}s
-            ${inCart  'div class=in-cart-badgeВ корзинеdiv'  ''}
-            ${imgHtml}
-            div class=product-info
-              div class=product-name${p.name}div
-              div class=product-price${p.price_kzt.toLocaleString()} ₸div
-              div class=product-price-rub${p.price_rub.toLocaleString()} ₽div
-            div
-          div
-        `;
-      }).join('')}
-    div`;
-  }
-
-   ===== ФИЛЬТР =====
-  function filterCategory(cat) {
-    currentCategory = cat;
-
-    document.querySelectorAll('.cat-btn').forEach(b = b.classList.remove('active'));
-    event.target.classList.add('active');
-
-    const titleEl = document.getElementById('sectionTitle');
-    if (cat === 'all') {
-      titleEl.textContent = 'Все товары';
-      renderProducts(allProducts);
-    } else {
-      const names = {'кастеты''Кастеты','дубинки''Дубинки','подики''Подики','одноразки''Одноразки','жижи''Жижи','прочее''Прочее'};
-      titleEl.textContent = names[cat]  cat;
-      renderProducts(allProducts.filter(p = p.category === cat));
-    }
-  }
-
-   ===== ОТКРЫТЬ ТОВАР =====
-  function openProduct(id) {
-    const product = allProducts.find(p = p.id === id);
-    if (!product) return;
-
-    selectedProduct = product;
-    selectedVariant = null;
-    selectedQty = 1;
-
-    const emoji = CATEGORY_EMOJI[product.category]  '📦';
-    const variants = product.variants  product.variants.split(',').map(v = v.trim()).filter(Boolean)  [];
-    const cartItem = cart.find(i = i.id === id);
-    const inCart = !!cartItem;
-
-    const imgHtml = product.image_url
-       `img class=modal-img src=${product.image_url} alt=${product.name} onerror=this.outerHTML='div class='modal-img-placeholder'${emoji}div'`
-       `div class=modal-img-placeholder${emoji}div`;
-
-    document.getElementById('modalContent').innerHTML = `
+  const inCart = new Set(cart.map(i=>i.id));
+  c.innerHTML = `<div class="grid">${list.map((p,i)=>{
+    const ico = CAT_ICONS[p.category]||CAT_ICONS['прочее'];
+    const imgHtml = p.image_url
+      ? `<div class="card-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card-img-ph style=aspect-ratio:1>${ico.replace(/stroke=/g,'stroke=')}</div>'"></div>`
+      : `<div class="card-img-ph">${ico}</div>`;
+    const ic = inCart.has(p.id);
+    return `<div class="card${ic?' in-cart':''}" onclick="openProd(${p.id})" style="animation-delay:${i*.04}s">
+      ${ic?'<div class="badge-cart">В корзине</div>':''}
       ${imgHtml}
-      div class=modal-body
-        div class=modal-category${product.category}div
-        div class=modal-name${product.name}div
-        div class=modal-price${product.price_kzt.toLocaleString()} ₸div
-        div class=modal-price-rub${product.price_rub.toLocaleString()} ₽div
-        ${product.description  `div class=modal-desc${product.description}div`  ''}
+      <div class="card-body">
+        <div class="card-name">${p.name}</div>
+        <div class="card-price">${p.price_kzt.toLocaleString()} ₸</div>
+        <div class="card-rub">${p.price_rub.toLocaleString()} ₽</div>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
 
-        ${variants.length  `
-          div class=variants-titleВыбери вариантdiv
-          div class=variants-list
-            ${variants.map(v = `button class=variant-btn onclick=selectVariant(this,'${v}')${v}button`).join('')}
-          div
-        `  ''}
+function setcat(el, cat) {
+  curCat = cat;
+  document.querySelectorAll('.cat').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('secLabel').textContent = CAT_NAMES[cat]||cat;
+  render(cat==='all' ? products : products.filter(p=>p.category===cat));
+}
 
-        div class=qty-row
-          div class=qty-labelКоличествоdiv
-          div class=qty-controls
-            button class=qty-btn onclick=changeQty(-1)−button
-            div class=qty-val id=qtyVal1div
-            button class=qty-btn onclick=changeQty(1)+button
-          div
-        div
+function openProd(id) {
+  const p = products.find(x=>x.id===id);
+  if (!p) return;
+  selProd=p; selVar=null; selQty=1;
+  const ico = CAT_ICONS[p.category]||CAT_ICONS['прочее'];
+  const vars = p.variants ? p.variants.split(',').map(v=>v.trim()).filter(Boolean) : [];
+  const imgHtml = p.image_url
+    ? `<img class="pmod-img" src="${p.image_url}" alt="${p.name}" onerror="this.outerHTML='<div class=pmod-img-ph>${ico}</div>'">`
+    : `<div class="pmod-img-ph">${ico}</div>`;
+  const inCart = cart.find(i=>i.id===id);
+  document.getElementById('prodContent').innerHTML = `
+    ${imgHtml}
+    <div class="pmod-body">
+      <div class="pmod-cat">${p.category}</div>
+      <div class="pmod-name">${p.name}</div>
+      <div class="pmod-price">${p.price_kzt.toLocaleString()} ₸</div>
+      <div class="pmod-rub">${p.price_rub.toLocaleString()} ₽</div>
+      ${p.description?`<div class="pmod-desc">${p.description}</div>`:''}
+      ${vars.length?`<div class="row-label">Вариант</div><div class="variants">${vars.map(v=>`<button class="var-btn" onclick="pickVar(this,'${v}')">${v}</button>`).join('')}</div>`:''}
+      <div class="qty-row">
+        <div class="row-label">Количество</div>
+        <div class="qty-ctrl">
+          <button class="qb" onclick="chQty(-1)">−</button>
+          <div class="qv" id="qtyVal">1</div>
+          <button class="qb" onclick="chQty(1)">+</button>
+        </div>
+      </div>
+      <button class="add-btn${inCart?' done':''}" id="addBtn" onclick="addCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${inCart?'<polyline points="20 6 9 17 4 12"/>':'<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>'}</svg>
+        ${inCart?'Уже в корзине':'Добавить в корзину'}
+      </button>
+    </div>`;
+  document.getElementById('prodOverlay').classList.add('on');
+  document.body.style.overflow='hidden';
+}
 
-        button class=add-btn ${inCart  'added'  ''} id=addBtn onclick=addToCart()
-          ${inCart  '✓ Уже в корзине'  '+ Добавить в корзину'}
-        button
-      div
-    `;
+function pickVar(btn, v) {
+  document.querySelectorAll('.var-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); selVar=v;
+}
 
-    document.getElementById('modalOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
+function chQty(d) {
+  selQty=Math.max(1,Math.min(99,selQty+d));
+  document.getElementById('qtyVal').textContent=selQty;
+}
+
+function closeModOut(e) { if(e.target===document.getElementById('prodOverlay')) closeMod(); }
+function closeMod() { document.getElementById('prodOverlay').classList.remove('on'); document.body.style.overflow=''; }
+
+function addCart() {
+  if (!selProd) return;
+  const ex = cart.find(i=>i.id===selProd.id && i.variant===selVar);
+  if (ex) ex.qty+=selQty;
+  else cart.push({id:selProd.id,name:selProd.name,price_kzt:selProd.price_kzt,price_rub:selProd.price_rub,image_url:selProd.image_url,category:selProd.category,variant:selVar,qty:selQty});
+  updCartBtn();
+  const btn=document.getElementById('addBtn');
+  btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Добавлено!`;
+  btn.classList.add('done');
+  setTimeout(()=>{closeMod(); render(curCat==='all'?products:products.filter(p=>p.category===curCat));},500);
+}
+
+function updCartBtn() {
+  const t=cart.reduce((s,i)=>s+i.qty,0);
+  const btn=document.getElementById('cartBtn');
+  const cnt=document.getElementById('cartCount');
+  if(t>0){btn.classList.add('active');cnt.textContent=t;}
+  else{btn.classList.remove('active');cnt.textContent=0;}
+}
+
+function openCart() {
+  renderCart();
+  document.getElementById('cartOverlay').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function closeCart() { document.getElementById('cartOverlay').classList.remove('on'); document.body.style.overflow=''; }
+function closeCartOut(e) { if(e.target===document.getElementById('cartOverlay')) closeCart(); }
+
+function renderCart() {
+  const c=document.getElementById('cartContent');
+  if (!cart.length) {
+    c.innerHTML=`<div class="cart-empty-wrap"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div class="cart-empty-t">Корзина пустая</div></div>`;
+    return;
   }
+  const tkzt=cart.reduce((s,i)=>s+i.price_kzt*i.qty,0);
+  const trub=cart.reduce((s,i)=>s+i.price_rub*i.qty,0);
+  const ico=CAT_ICONS;
+  c.innerHTML=`
+    <div class="cart-items">${cart.map((item,idx)=>{
+      const thumbHtml = item.image_url
+        ? `<img src="${item.image_url}" onerror="this.style.display='none'">`
+        : (ico[item.category]||ico['прочее']);
+      return `<div class="ci">
+        <div class="ci-thumb">${thumbHtml}</div>
+        <div class="ci-info">
+          <div class="ci-name">${item.name}</div>
+          ${item.variant?`<div class="ci-var">${item.variant}</div>`:''}
+          <div class="ci-price">${(item.price_kzt*item.qty).toLocaleString()} ₸</div>
+        </div>
+        <div class="ci-qty">
+          <button class="cqb" onclick="cq(${idx},-1)">−</button>
+          <div class="cqv">${item.qty}</div>
+          <button class="cqb" onclick="cq(${idx},1)">+</button>
+        </div>
+      </div>`;
+    }).join('')}</div>
+    <div class="cart-foot">
+      <div class="total-row">
+        <div class="total-label">Итого</div>
+        <div><div class="total-kzt">${tkzt.toLocaleString()} ₸</div><div class="total-rub">${trub.toLocaleString()} ₽</div></div>
+      </div>
+      <button class="buy-btn" onclick="checkout()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Оформить заказ
+      </button>
+    </div>`;
+}
 
-  function selectVariant(btn, variant) {
-    document.querySelectorAll('.variant-btn').forEach(b = b.classList.remove('selected'));
-    btn.classList.add('selected');
-    selectedVariant = variant;
-  }
+function cq(idx, d) {
+  cart[idx].qty=Math.max(0,cart[idx].qty+d);
+  if(cart[idx].qty===0) cart.splice(idx,1);
+  updCartBtn(); renderCart();
+  render(curCat==='all'?products:products.filter(p=>p.category===curCat));
+}
 
-  function changeQty(delta) {
-    selectedQty = Math.max(1, Math.min(99, selectedQty + delta));
-    document.getElementById('qtyVal').textContent = selectedQty;
-  }
+function checkout() {
+  if (!cart.length) return;
+  const tkzt=cart.reduce((s,i)=>s+i.price_kzt*i.qty,0);
+  const trub=cart.reduce((s,i)=>s+i.price_rub*i.qty,0);
+  const data={items:cart.map(i=>({id:i.id,name:i.name,variant:i.variant,qty:i.qty,price_kzt:i.price_kzt,price_rub:i.price_rub})),total_kzt:tkzt,total_rub:trub};
+  if (window.Telegram && window.Telegram.WebApp) window.Telegram.WebApp.sendData(JSON.stringify(data));
+  else alert('Открой через Telegram бота!');
+}
 
-  function closeModalOutside(e) {
-    if (e.target === document.getElementById('modalOverlay')) closeModal();
-  }
-
-  function closeModal() {
-    document.getElementById('modalOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-   ===== КОРЗИНА =====
-  function addToCart() {
-    if (!selectedProduct) return;
-
-    const existing = cart.find(i = i.id === selectedProduct.id && i.variant === selectedVariant);
-    if (existing) {
-      existing.qty += selectedQty;
-    } else {
-      cart.push({
-        id selectedProduct.id,
-        name selectedProduct.name,
-        price_kzt selectedProduct.price_kzt,
-        price_rub selectedProduct.price_rub,
-        image_url selectedProduct.image_url,
-        category selectedProduct.category,
-        variant selectedVariant,
-        qty selectedQty
-      });
-    }
-
-    updateCartBtn();
-    renderProducts(currentCategory === 'all'  allProducts  allProducts.filter(p = p.category === currentCategory));
-
-    const btn = document.getElementById('addBtn');
-    btn.textContent = '✓ Добавлено!';
-    btn.classList.add('added');
-    setTimeout(closeModal, 600);
-  }
-
-  function updateCartBtn() {
-    const total = cart.reduce((s, i) = s + i.qty, 0);
-    const btn = document.getElementById('cartBtn');
-    const count = document.getElementById('cartCount');
-
-    if (total  0) {
-      btn.classList.add('has-items');
-      count.style.display = 'flex';
-      count.textContent = total;
-    } else {
-      btn.classList.remove('has-items');
-      count.style.display = 'none';
-    }
-  }
-
-  function openCart() {
-    renderCart();
-    document.getElementById('cartOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCart() {
-    document.getElementById('cartOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function closeCartOutside(e) {
-    if (e.target === document.getElementById('cartOverlay')) closeCart();
-  }
-
-  function renderCart() {
-    const container = document.getElementById('cartContent');
-
-    if (!cart.length) {
-      container.innerHTML = `
-        div class=cart-empty
-          div class=cart-empty-icon🛒div
-          div class=cart-empty-textКорзина пустаяdiv
-        div
-      `;
-      return;
-    }
-
-    const totalKzt = cart.reduce((s, i) = s + i.price_kzt  i.qty, 0);
-    const totalRub = cart.reduce((s, i) = s + i.price_rub  i.qty, 0);
-    const emoji_map = CATEGORY_EMOJI;
-
-    container.innerHTML = `
-      div class=cart-items
-        ${cart.map((item, idx) = {
-          const emoji = emoji_map[item.category]  '📦';
-          const thumbHtml = item.image_url
-             `img src=${item.image_url} style=width100%;height100%;object-fitcover;border-radius10px onerror=this.outerHTML='${emoji}'`
-             emoji;
-          return `
-            div class=cart-item
-              div class=cart-item-emoji${thumbHtml}div
-              div class=cart-item-info
-                div class=cart-item-name${item.name}div
-                ${item.variant  `div class=cart-item-variant${item.variant}div`  ''}
-                div class=cart-item-price${(item.price_kzt  item.qty).toLocaleString()} ₸div
-              div
-              div class=cart-item-qty
-                button class=cqb onclick=cartQty(${idx},-1)−button
-                div class=cqv${item.qty}div
-                button class=cqb onclick=cartQty(${idx},1)+button
-              div
-            div
-          `;
-        }).join('')}
-      div
-      div class=cart-footer
-        div class=cart-total
-          div class=cart-total-labelИтогоdiv
-          div
-            div class=cart-total-price${totalKzt.toLocaleString()} ₸div
-            div class=cart-total-rub${totalRub.toLocaleString()} ₽div
-          div
-        div
-        button class=buy-btn onclick=checkout()💳 Оформить заказbutton
-      div
-    `;
-  }
-
-  function cartQty(idx, delta) {
-    cart[idx].qty = Math.max(0, cart[idx].qty + delta);
-    if (cart[idx].qty === 0) cart.splice(idx, 1);
-    updateCartBtn();
-    renderCart();
-    renderProducts(currentCategory === 'all'  allProducts  allProducts.filter(p = p.category === currentCategory));
-  }
-
-   ===== ОФОРМЛЕНИЕ =====
-  function checkout() {
-    if (!cart.length) return;
-
-    const totalKzt = cart.reduce((s, i) = s + i.price_kzt  i.qty, 0);
-    const totalRub = cart.reduce((s, i) = s + i.price_rub  i.qty, 0);
-
-    const data = {
-      items cart.map(i = ({
-        id i.id,
-        name i.name,
-        variant i.variant,
-        qty i.qty,
-        price_kzt i.price_kzt,
-        price_rub i.price_rub
-      })),
-      total_kzt totalKzt,
-      total_rub totalRub
-    };
-
-    if (window.Telegram && window.Telegram.WebApp) {
-      window.Telegram.WebApp.sendData(JSON.stringify(data));
-    } else {
-      alert('Открой магазин через Telegram бота!');
-    }
-  }
-
-   ===== TELEGRAM WEBAPP INIT =====
-  if (window.Telegram && window.Telegram.WebApp) {
-    window.Telegram.WebApp.ready();
-    window.Telegram.WebApp.expand();
-  }
-
-   ===== СТАРТ =====
-  loadProducts();
-script
-body
-html
-```
+if (window.Telegram && window.Telegram.WebApp) { window.Telegram.WebApp.ready(); window.Telegram.WebApp.expand(); }
+loadProducts();
+</script>
+</body>
+</html>
